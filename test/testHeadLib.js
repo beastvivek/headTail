@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { sliceLines } = require('../src/headLib.js');
+const { sliceLines, head } = require('../src/headLib.js');
 
 describe('sliceLines', () => {
   it('Should give a line back', () => {
@@ -15,15 +15,26 @@ describe('sliceLines', () => {
   });
 
   it('Should give max of ten lines', () => {
-    const lines = [
-      'hello', 'bye', 'hello',
-      'bye', 'hello', 'bye',
-      'hello', 'bye', 'hello',
-      'bye', 'hello', 'bye'];
-    const expected = ['hello', 'bye', 'hello',
-      'bye', 'hello', 'bye',
-      'hello', 'bye', 'hello',
-      'bye'];
+    const lines = ['h', 'b', 'h', 'b', 'h', 'b', 'h', 'b', 'h', 'b', 'h', 'b'];
+    const expected = ['h', 'b', 'h', 'b', 'h', 'b', 'h', 'b', 'h', 'b'];
     assert.deepStrictEqual(sliceLines(lines), expected);
+  });
+});
+
+describe('head', () => {
+  it('Should work for one line', () => {
+    assert.deepStrictEqual(head('hello'), 'hello');
+    assert.deepStrictEqual(head('bye'), 'bye');
+  });
+
+  it('Should work for more than one line', () => {
+    assert.deepStrictEqual(head('hello\nbye'), 'hello\nbye');
+    assert.deepStrictEqual(head('bye\nhello\nbye'), 'bye\nhello\nbye');
+  });
+
+  it('Should give max of ten lines', () => {
+    const line = 'h\nb\nh\nb\nh\nb\nh\nb\nh\nb\nh\nb';
+    const exp = 'h\nb\nh\nb\nh\nb\nh\nb\nh\nb';
+    assert.deepStrictEqual(head(line), exp);
   });
 });

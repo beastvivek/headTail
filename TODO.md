@@ -1,11 +1,11 @@
 **TODO**
-- [ ] Test `head` function 
 - [ ] Create separate functions for split and join
 - [ ] Create a main function 
  
 **MAYBE**
 
 **DONE**
+- [x] Test `head` function 
 - [x] `sliceLines` should return only ten lines if more than ten lines are given
 - [x] Create a function that converts string to array and passes to `sliceLines`
 - [x] Consider changing the name of `head` function
