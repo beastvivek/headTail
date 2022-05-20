@@ -4,8 +4,8 @@ const sliceLines = (lines, limit) => lines.slice(0, limit);
 
 const grabNLines = (content, lineCount) => {
   const lines = splitLines(content);
-  const filteredLines = sliceLines(lines, lineCount);
-  return joinLines(filteredLines);
+  const slicedLines = sliceLines(lines, lineCount);
+  return joinLines(slicedLines);
 };
 
 const head = () => {

@@ -35,7 +35,7 @@ describe('grabNLines', () => {
 
   it('Should work for more than one line', () => {
     assert.deepStrictEqual(grabNLines('hello\nbye', 10), 'hello\nbye');
-    assert.deepStrictEqual(grabNLines('bye\nhello\nbye', 10), 'bye\nhello\nbye');
+    assert.deepStrictEqual(grabNLines('b\nhello\nb', 10), 'b\nhello\nb');
   });
 
   it('Should give max of ten lines', () => {
