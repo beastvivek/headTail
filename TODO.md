@@ -1,14 +1,14 @@
 **TODO**
-- [ ] Rename main in headLib.js
-- [ ] Create a main in head.js
 - [ ] Parse options to object
 - [ ] Set default lineCount to 10 if no options are given
 - [ ] Don't set characterCount unless given
-- [ ] Give error if both options are given by user 
+- [ ] Give usage if both options are given by user 
  
 **MAYBE**
 
 **DONE**
+- [x] Rename main in headLib.js
+- [x] Create a main in head.js
 - [x] Create main
 - [x] Test main
 - [x] Test head function

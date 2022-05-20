@@ -19,13 +19,13 @@ const head = (content, options) => {
   return grabNCharacters(content, options.characterCount);
 };
 
-const main = (readFile, filePath) => {
+const headMain = (readFile, filePath) => {
   const content = readFile(filePath, 'utf8');
-  return head(content, {});
+  return head(content, { lineCount: 10 });
 };
 
 exports.sliceLines = sliceLines;
 exports.grabNLines = grabNLines;
 exports.grabNCharacters = grabNCharacters;
-exports.main = main;
+exports.headMain = headMain;
 exports.head = head;

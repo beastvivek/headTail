@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { main } = require('../src/headLib.js');
+const { headMain } = require('../src/headLib.js');
 
 const mockReadFileSync = (actualFilePath, actualEncoding, text) => {
   return function (filePath, encoding) {
@@ -9,9 +9,9 @@ const mockReadFileSync = (actualFilePath, actualEncoding, text) => {
   };
 };
 
-describe('main', () => {
+describe('headMain', () => {
   it('Should give the content', () => {
     const mockedReadFileSync = mockReadFileSync('./a.txt', 'utf8', 'hello');
-    assert.deepStrictEqual(main(mockedReadFileSync, './a.txt'), 'hello');
+    assert.deepStrictEqual(headMain(mockedReadFileSync, './a.txt'), 'hello');
   });
 });
