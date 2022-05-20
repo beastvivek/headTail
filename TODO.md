@@ -5,9 +5,9 @@
  
 **MAYBE**
 - [ ] Consider moving splitLines and joinLines functions to new file
-- [ ] Consider making `\n` as a constant
 
 **DONE**
+- [x] Consider making `\n` as a constant
 - [x] Create a main function 
 - [x] Create separate functions for split and join
 - [x] Test `head` function 
