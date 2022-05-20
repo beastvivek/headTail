@@ -1,10 +1,14 @@
 **TODO**
-- [ ] Create separate functions for split and join
 - [ ] Create a main function 
+- [ ] Implement number of lines (-n) option
+- [ ] Send options as object
  
 **MAYBE**
+- [ ] Consider moving splitLines and joinLines functions to new file
+- [ ] Consider making `\n` as a constant
 
 **DONE**
+- [x] Create separate functions for split and join
 - [x] Test `head` function 
 - [x] `sliceLines` should return only ten lines if more than ten lines are given
 - [x] Create a function that converts string to array and passes to `sliceLines`
