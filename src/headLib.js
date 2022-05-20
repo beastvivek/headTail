@@ -8,10 +8,15 @@ const grabNLines = (content, lineCount) => {
   return joinLines(slicedLines);
 };
 
+const grabNCharacters = (content, characterCount) => {
+  return content.slice(0, characterCount);
+};
+
 const head = () => {
   return grabNLines('one\ntwo', 10);
 };
 
 exports.sliceLines = sliceLines;
 exports.grabNLines = grabNLines;
+exports.grabNCharacters = grabNCharacters;
 exports.head = head;

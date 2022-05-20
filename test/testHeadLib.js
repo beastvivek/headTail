@@ -1,5 +1,6 @@
 const assert = require('assert');
-const { sliceLines, grabNLines } = require('../src/headLib.js');
+const lib = require('../src/headLib.js');
+const { sliceLines, grabNLines, grabNCharacters } = lib;
 
 describe('sliceLines', () => {
   it('Should give a line back', () => {
@@ -48,5 +49,17 @@ describe('grabNLines', () => {
     const lines = ['h', 'b', 'h', 'b', 'h'];
     const expected = ['h', 'b', 'h', 'b', 'h'];
     assert.deepStrictEqual(sliceLines(lines, 5), expected);
+  });
+});
+
+describe('grabNCharacters', () => {
+  it('Should return empty string', () => {
+    assert.deepStrictEqual(grabNCharacters('', 1), '');
+  });
+  it('Should return first character', () => {
+    assert.deepStrictEqual(grabNCharacters('hello', 1), 'h');
+  });
+  it('Should return three characters', () => {
+    assert.deepStrictEqual(grabNCharacters('hello', 3), 'hel');
   });
 });

@@ -1,13 +1,15 @@
 **TODO**
-- [ ] Implement characterCount(-c) option
-- [ ] No default value for characterCount
 - [ ] Test head function
+- [ ] Send options as object to head
+- [ ] Call from head according to the object key
 - [ ] Main should have a default lineCount of 10
-- [ ] Send options as object
  
 **MAYBE**
+- [ ] Split test file into testCharacterCount.js, testLineCount.js and testHead.js
 
 **DONE**
+- [x] No default value for characterCount
+- [x] Implement characterCount(-c) option
 - [x] Rename main to head 
 - [x] Consider renaming head function
 - [x] Hardcode value of lineCount(-n) in main 
