@@ -1,11 +1,14 @@
 **TODO**
-- [ ] Implement lineCount(-n) option
-- [ ] Hardcode value of lineCount(-n) in main 
+- [ ] Implement characterCount(-c) option
 - [ ] Send options as object
+- [ ] Main should have a default lineCount of 10
  
 **MAYBE**
+- [ ] Consider renaming head function
 
 **DONE**
+- [x] Hardcode value of lineCount(-n) in main 
+- [x] Implement lineCount(-n) option
 - [x] Consider moving splitLines, joinLines and NEWLINE functions to new file
 - [x] Consider making `\n` as a constant
 - [x] Create a main function 
