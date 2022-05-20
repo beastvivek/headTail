@@ -1,16 +1,16 @@
 const assert = require('assert');
-const { head } = require('../src/headLib.js');
+const { sliceLines } = require('../src/headLib.js');
 
-describe('head', () => {
+describe('sliceLines', () => {
   it('Should give a line back', () => {
-    assert.deepStrictEqual(head(['hello']), ['hello']);
-    assert.deepStrictEqual(head(['bye']), ['bye']);
+    assert.deepStrictEqual(sliceLines(['hello']), ['hello']);
+    assert.deepStrictEqual(sliceLines(['bye']), ['bye']);
   });
 
   it('Should give multiple lines back', () => {
-    assert.deepStrictEqual(head(['hello', 'bye']),
+    assert.deepStrictEqual(sliceLines(['hello', 'bye']),
       ['hello', 'bye']);
-    assert.deepStrictEqual(head(['hello', 'bye', 'hi']),
+    assert.deepStrictEqual(sliceLines(['hello', 'bye', 'hi']),
       ['hello', 'bye', 'hi']);
   });
 });
