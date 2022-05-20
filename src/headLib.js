@@ -8,5 +8,10 @@ const head = (content) => {
   return joinLines(filteredLines);
 };
 
+const main = () => {
+  return head('one\ntwo');
+};
+
 exports.sliceLines = sliceLines;
 exports.head = head;
+exports.main = main;

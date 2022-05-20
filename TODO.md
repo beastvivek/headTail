@@ -1,6 +1,6 @@
 **TODO**
-- [ ] Create a main function 
-- [ ] Implement number of lines (-n) option
+- [ ] Implement lineCount(-n) option
+- [ ] Hardcode value of lineCount(-n) in main 
 - [ ] Send options as object
  
 **MAYBE**
@@ -8,6 +8,7 @@
 - [ ] Consider making `\n` as a constant
 
 **DONE**
+- [x] Create a main function 
 - [x] Create separate functions for split and join
 - [x] Test `head` function 
 - [x] `sliceLines` should return only ten lines if more than ten lines are given
