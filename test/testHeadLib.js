@@ -6,4 +6,9 @@ describe('head', () => {
     assert.deepStrictEqual(head('hello'), 'hello');
     assert.deepStrictEqual(head('bye'), 'bye');
   });
+
+  it('Should give multiple lines back', () => {
+    assert.deepStrictEqual(head('hello\nbye'), 'hello\nbye');
+    assert.deepStrictEqual(head('hello\nbye\nhi'), 'hello\nbye\nhi');
+  });
 });

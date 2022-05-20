@@ -1,10 +1,14 @@
 **TODO**
-- [ ] Make `head` work for multiple lines
+- [ ] Use array for `head` function instead of string
+- [ ] Create a function that converts string to array and passes to `head`.
+- [ ] Should return only ten lines if more than ten lines are given
  
 **MAYBE**
 - [ ] Consider a richer contract for `head`
+- [ ] Consider changing the name of `head` function
 
 **DONE**
+- [x] Make `head` work for multiple lines
 - [x] Change the contract for `head [...file]`
 - [x] Take argument for the `head` function
 - [x] Create `src` and `test` directories
