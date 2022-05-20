@@ -13,4 +13,17 @@ describe('sliceLines', () => {
     assert.deepStrictEqual(sliceLines(['hello', 'bye', 'hi']),
       ['hello', 'bye', 'hi']);
   });
+
+  it('Should give max of ten lines', () => {
+    const lines = [
+      'hello', 'bye', 'hello',
+      'bye', 'hello', 'bye',
+      'hello', 'bye', 'hello',
+      'bye', 'hello', 'bye'];
+    const expected = ['hello', 'bye', 'hello',
+      'bye', 'hello', 'bye',
+      'hello', 'bye', 'hello',
+      'bye'];
+    assert.deepStrictEqual(sliceLines(lines), expected);
+  });
 });

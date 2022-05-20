@@ -1,4 +1,4 @@
-const sliceLines = (lines) => lines;
+const sliceLines = (lines) => lines.slice(0, 10);
 
 const head = (content) => {
   const lines = content.split('\n');
