@@ -1,6 +1,6 @@
 **TODO**
-- [ ] Create main
-- [ ] Test main
+- [ ] Rename main in headLib.js
+- [ ] Create a main in head.js
 - [ ] Parse options to object
 - [ ] Set default lineCount to 10 if no options are given
 - [ ] Don't set characterCount unless given
@@ -9,6 +9,8 @@
 **MAYBE**
 
 **DONE**
+- [x] Create main
+- [x] Test main
 - [x] Test head function
 - [x] Send options as object to head
 - [x] Call from head according to the object key
