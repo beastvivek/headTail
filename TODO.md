@@ -1,9 +1,12 @@
 **TODO**
-- [ ] Create `src` and `test` directories
-- [ ] Create `testHeadLib.js`
-- [ ] Write happy path test case
-- [ ] Start with hard coded content
+- [ ] Change the contract for `head [...file]`
+- [ ] Take argument for the `head` function
+- [ ] Make `head` work for more than one line content
  
 **MAYBE**
 
 **DONE**
+- [x] Create `src` and `test` directories
+- [x] Create `testHeadLib.js`
+- [x] Write a happy path test case
+- [x] Start with hard coded content
