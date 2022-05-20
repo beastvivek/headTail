@@ -1,12 +1,17 @@
 **TODO**
-- [ ] Test head function
-- [ ] Send options as object to head
-- [ ] Call from head according to the object key
-- [ ] Main should have a default lineCount of 10
+- [ ] Create main
+- [ ] Test main
+- [ ] Parse options to object
+- [ ] Set default lineCount to 10 if no options are given
+- [ ] Don't set characterCount unless given
+- [ ] Give error if both options are given by user 
  
 **MAYBE**
 
 **DONE**
+- [x] Test head function
+- [x] Send options as object to head
+- [x] Call from head according to the object key
 - [x] Split test file into testCharacterCount.js, testLineCount.js and testHead.js
 - [x] No default value for characterCount
 - [x] Implement characterCount(-c) option

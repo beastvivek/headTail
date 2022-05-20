@@ -12,8 +12,11 @@ const grabNCharacters = (content, characterCount) => {
   return content.slice(0, characterCount);
 };
 
-const head = () => {
-  return grabNLines('one\ntwo', 10);
+const head = (content, options) => {
+  if (options.lineCount !== undefined) {
+    return grabNLines(content, options.lineCount);
+  }
+  return grabNCharacters(content, options.characterCount);
 };
 
 exports.sliceLines = sliceLines;
