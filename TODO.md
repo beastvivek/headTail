@@ -5,9 +5,9 @@
 - [ ] Main should have a default lineCount of 10
  
 **MAYBE**
-- [ ] Split test file into testCharacterCount.js, testLineCount.js and testHead.js
 
 **DONE**
+- [x] Split test file into testCharacterCount.js, testLineCount.js and testHead.js
 - [x] No default value for characterCount
 - [x] Implement characterCount(-c) option
 - [x] Rename main to head 
