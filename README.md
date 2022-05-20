@@ -6,7 +6,7 @@
 
 ```
 head [file...]
-  It displays the first 10 lines of the file given.
+  It displays the first 10 lines or less if file has lines less than 10.
 
 head -n count [file...]
   It displays first count number of lines.
