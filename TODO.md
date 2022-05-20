@@ -4,9 +4,9 @@
 - [ ] Send options as object
  
 **MAYBE**
-- [ ] Consider moving splitLines and joinLines functions to new file
 
 **DONE**
+- [x] Consider moving splitLines, joinLines and NEWLINE functions to new file
 - [x] Consider making `\n` as a constant
 - [x] Create a main function 
 - [x] Create separate functions for split and join
