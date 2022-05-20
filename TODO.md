@@ -4,9 +4,9 @@
 - [ ] Main should have a default lineCount of 10
  
 **MAYBE**
-- [ ] Consider renaming head function
 
 **DONE**
+- [x] Consider renaming head function
 - [x] Hardcode value of lineCount(-n) in main 
 - [x] Implement lineCount(-n) option
 - [x] Consider moving splitLines, joinLines and NEWLINE functions to new file
