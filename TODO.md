@@ -7,6 +7,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Have a try catch for hadMain
 - [x] Rename main in headLib.js
 - [x] Create a main in head.js
 - [x] Create main

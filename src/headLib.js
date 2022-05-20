@@ -20,7 +20,12 @@ const head = (content, options) => {
 };
 
 const headMain = (readFile, filePath) => {
-  const content = readFile(filePath, 'utf8');
+  let content;
+  try {
+    content = readFile(filePath, 'utf8');
+  } catch (error) {
+    throw { name: 'FileReadError', message: 'Cannot read the file' };
+  }
   return head(content, { lineCount: 10 });
 };
 
