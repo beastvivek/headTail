@@ -1,11 +1,14 @@
 **TODO**
 - [ ] Implement characterCount(-c) option
-- [ ] Send options as object
+- [ ] No default value for characterCount
+- [ ] Test head function
 - [ ] Main should have a default lineCount of 10
+- [ ] Send options as object
  
 **MAYBE**
 
 **DONE**
+- [x] Rename main to head 
 - [x] Consider renaming head function
 - [x] Hardcode value of lineCount(-n) in main 
 - [x] Implement lineCount(-n) option

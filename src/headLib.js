@@ -8,10 +8,10 @@ const grabNLines = (content, lineCount) => {
   return joinLines(filteredLines);
 };
 
-const main = () => {
+const head = () => {
   return grabNLines('one\ntwo', 10);
 };
 
 exports.sliceLines = sliceLines;
 exports.grabNLines = grabNLines;
-exports.main = main;
+exports.head = head;
