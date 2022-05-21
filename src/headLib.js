@@ -19,16 +19,32 @@ const head = (content, options) => {
   return grabNCharacters(content, options.characterCount);
 };
 
+// eslint-disable-next-line max-statements
 const parseArgs = args => {
-  return {
-    fileName: args
-  };
+  const keys = { '-n': 'lineCount', '-c': 'characterCount' };
+  const options = { fileName: [], option: {} };
+  const regex = /^-/;
+  for (let index = 0; index < args.length; index++) {
+    if (args[index].match(regex)) {
+      const [option, value] = args.slice(index, index + 2);
+      const key = keys[option];
+      options.option[key] = +value;
+      index += 1;
+    } else {
+      options.fileName.push(args[index]);
+    }
+  }
+  if (Object.keys(options.option).length === 0) {
+    options.option['lineCount'] = 10;
+  }
+  return options;
 };
 
-const headMain = (readFile, filePath) => {
+const headMain = (readFile, args) => {
   let content;
+  const { fileName, option } = parseArgs(args);
   try {
-    content = readFile(filePath, 'utf8');
+    content = readFile(fileName[0], 'utf8');
   } catch (error) {
     throw { name: 'FileReadError', message: 'Cannot read the file' };
   }
