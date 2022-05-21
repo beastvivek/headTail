@@ -21,16 +21,18 @@ const head = (content, option) => {
 };
 
 const headMain = (readFile, args) => {
-  let content, index = 0, result = '';
+  let content, result = '';
+  if (args[0] === '--help' || args === undefined) {
+    return 'usage: head[-n lines | -c bytes][file ...]';
+  }
   const { fileNames, option } = parseArgs(args);
-  while (index < fileNames.length) {
+  for (let index = 0; index < fileNames.length; index++) {
     try {
       content = readFile(fileNames[index], 'utf8');
     } catch (error) {
       throw { name: 'FileReadError', message: 'Cannot read the file' };
     }
     result += head(content, option);
-    index += 1;
   }
   return result;
 };

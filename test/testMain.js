@@ -30,4 +30,10 @@ describe('headMain', () => {
       headMain(mockedReadFileSync, ['-c', '2', './a.txt']),
       'h\n');
   });
+
+  it('Should return usage if --help is given', () => {
+    assert.strictEqual(
+      headMain(mockedReadFileSync, ['--help']),
+      'usage: head[-n lines | -c bytes][file ...]');
+  });
 });

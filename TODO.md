@@ -5,6 +5,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Should give help if --help option is given
 - [x] Give usage if both options are given by user 
 - [x] Surround main with a try catch block
 - [x] Use while for parseObj instead of for
