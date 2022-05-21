@@ -2,7 +2,8 @@ const addDefaultValue = (options) => {
   const stringedObject = JSON.stringify(options);
   const parsedObj = JSON.parse(stringedObject);
   if (Object.keys(parsedObj.option).length === 0) {
-    parsedObj.option['lineCount'] = 10;
+    parsedObj.option.key = 'lineCount';
+    parsedObj.option.value = 10;
   }
   return parsedObj;
 };
@@ -13,7 +14,8 @@ const addOption = (args, index, options) => {
   const keys = { '-n': 'lineCount', '-c': 'characterCount' };
   const [option, value] = args.slice(index, index + 2);
   const key = keys[option];
-  parsedObj.option[key] = +value;
+  parsedObj.option.key = key;
+  parsedObj.option.value = +value;
   return parsedObj;
 };
 

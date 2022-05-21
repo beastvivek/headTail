@@ -13,11 +13,11 @@ const grabNCharacters = (content, characterCount) => {
   return content.slice(0, characterCount);
 };
 
-const head = (content, options) => {
-  if (options.lineCount !== undefined) {
-    return grabNLines(content, options.lineCount);
+const head = (content, option) => {
+  if (option.key === 'lineCount') {
+    return grabNLines(content, option.value);
   }
-  return grabNCharacters(content, options.characterCount);
+  return grabNCharacters(content, option.value);
 };
 
 const headMain = (readFile, args) => {

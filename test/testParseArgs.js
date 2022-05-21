@@ -6,19 +6,19 @@ describe('parseArgs', () => {
   it('Should give object with fileNames key for one file', () => {
     assert.deepStrictEqual(
       parseArgs(['./a.txt']),
-      { fileNames: ['./a.txt'], option: { lineCount: 10 } });
+      { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 10 } });
   });
 
   it('Should give object with fileNames key for more than one file', () => {
     assert.deepStrictEqual(
       parseArgs(['./a.txt']),
-      { fileNames: ['./a.txt'], option: { lineCount: 10 } });
+      { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 10 } });
   });
 
   it('Should give object with fileNames and options key with lineCount', () => {
     assert.deepStrictEqual(
       parseArgs(['-n', '2', './a.txt']),
-      { fileNames: ['./a.txt'], option: { lineCount: 2 } }
+      { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 2 } }
     );
   });
 
@@ -26,7 +26,7 @@ describe('parseArgs', () => {
     () => {
       assert.deepStrictEqual(
         parseArgs(['-c', '2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { characterCount: 2 } }
+        { fileNames: ['./a.txt'], option: { key: 'characterCount', value: 2 } }
       );
     });
 });
@@ -35,13 +35,13 @@ describe('addOption', () => {
   it('Should give an object with lineCount key', () => {
     assert.deepStrictEqual(
       addOption(['-n', '2', './a.txt'], 0, { fileNames: [], option: {} }),
-      { fileNames: [], option: { lineCount: 2 } });
+      { fileNames: [], option: { key: 'lineCount', value: 2 } });
   });
 
   it('Should give an object with characterCount key', () => {
     assert.deepStrictEqual(
       addOption(['-c', '2', './a.txt'], 0, { fileNames: [], option: {} }),
-      { fileNames: [], option: { characterCount: 2 } });
+      { fileNames: [], option: { key: 'characterCount', value: 2 } });
   });
 });
 
@@ -49,15 +49,17 @@ describe('addDefaultValue', () => {
   it('Should add lineCount with value 10 if no option is present', () => {
     assert.deepStrictEqual(
       addDefaultValue({ fileNames: [], option: {} }),
-      { fileNames: [], option: { lineCount: 10 } });
+      { fileNames: [], option: { key: 'lineCount', value: 10 } });
   });
 
   it('Should not add any default value if option has value', () => {
+    let input = { fileNames: [], option: { key: 'lineCount', value: 2 } };
     assert.deepStrictEqual(
-      addDefaultValue({ fileNames: [], option: { lineCount: 10 } }),
-      { fileNames: [], option: { lineCount: 10 } });
+      addDefaultValue(input),
+      { fileNames: [], option: { key: 'lineCount', value: 2 } });
+    input = { fileNames: [], option: { key: 'characterCount', value: 5 } };
     assert.deepStrictEqual(
-      addDefaultValue({ fileNames: [], option: { characterCount: 5 } }),
-      { fileNames: [], option: { characterCount: 5 } });
+      addDefaultValue(input),
+      { fileNames: [], option: { key: 'characterCount', value: 5 } });
   });
 });

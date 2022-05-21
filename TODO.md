@@ -1,5 +1,4 @@
 **TODO**
-- [ ] Change the object structure
 - [ ] Use while for parseObj instead of for
 - [ ] Give usage if both options are given by user 
 - [ ] Make head work for no space between option and value
@@ -7,6 +6,8 @@
 **MAYBE**
 
 **DONE**
+- [x] Change head function's contract
+- [x] Change the object structure
 - [x] Make head work for multiple files as input
 - [x] Don't set characterCount unless given
 - [x] Test addDefaultValue and addOption functions
