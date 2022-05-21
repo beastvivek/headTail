@@ -54,6 +54,17 @@ describe('addOption', () => {
       addOption(['-c', '2', './a.txt'], 0, { fileNames: [], option: {} }),
       { fileNames: [], option: { key: 'characterCount', value: 2 } });
   });
+
+  it('Should throw error if option has 0 value',
+    () => {
+      assert.throws(
+        () => parseArgs(['-c', '0', './a.txt']),
+        {
+          name: 'IllegalValue',
+          message: 'head: illegal value -- 0',
+        }
+      );
+    });
 });
 
 describe('addDefaultValue', () => {

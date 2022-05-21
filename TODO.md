@@ -5,6 +5,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Give error when 0 is given with the switches
 - [x] Should give help if --help option is given
 - [x] Give usage if both options are given by user 
 - [x] Surround main with a try catch block
