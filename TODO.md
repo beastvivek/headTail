@@ -1,5 +1,4 @@
 **TODO**
-- [ ] Test addDefaultValue and addOption functions
 - [ ] Make head work for multiple files as input
 - [ ] Don't set characterCount unless given
 - [ ] Give usage if both options are given by user 
@@ -7,6 +6,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Test addDefaultValue and addOption functions
 - [x] Refactor parseArgs function
 - [x] Set default lineCount to 10 if no options are given
 - [x] Make head work for single file with options

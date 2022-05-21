@@ -33,3 +33,5 @@ const parseArgs = args => {
 };
 
 exports.parseArgs = parseArgs;
+exports.addOption = addOption;
+exports.addDefaultValue = addDefaultValue;
