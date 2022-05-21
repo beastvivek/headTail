@@ -28,7 +28,7 @@ const headMain = (readFile, args) => {
   } catch (error) {
     throw { name: 'FileReadError', message: 'Cannot read the file' };
   }
-  return head(content, { lineCount: 10 });
+  return head(content, option);
 };
 
 exports.sliceLines = sliceLines;
