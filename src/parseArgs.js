@@ -21,15 +21,13 @@ const addOption = (args, index, options) => {
 
 const parseArgs = args => {
   let options = { fileNames: [], option: {} };
-  for (let index = 0; index < args.length; index++) {
-    const regex = /^-/;
-    if (args[index].match(regex)) {
-      options = addOption(args, index, options);
-      index += 1;
-    } else {
-      options.fileNames.push(args[index]);
-    }
+  let index = 0;
+  const regex = /^-/;
+  while (regex.test(args[index])) {
+    options = addOption(args, index, options);
+    index += 2;
   }
+  options.fileNames = args.slice(index);
   options = addDefaultValue(options);
   return options;
 };

@@ -1,11 +1,12 @@
 **TODO**
-- [ ] Use while for parseObj instead of for
 - [ ] Give usage if both options are given by user 
+- [ ] Surround main with a try catch block
 - [ ] Make head work for no space between option and value
  
 **MAYBE**
 
 **DONE**
+- [x] Use while for parseObj instead of for
 - [x] Change head function's contract
 - [x] Change the object structure
 - [x] Make head work for multiple files as input
