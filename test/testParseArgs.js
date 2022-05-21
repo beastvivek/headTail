@@ -29,6 +29,17 @@ describe('parseArgs', () => {
         { fileNames: ['./a.txt'], option: { key: 'characterCount', value: 2 } }
       );
     });
+
+  it('Should give usage if both options are given',
+    () => {
+      assert.throws(
+        () => parseArgs(['-c', '2', '-n', '2', './a.txt']),
+        {
+          name: 'IllegalOption',
+          message: 'usage: head[-n lines | -c bytes][file ...]',
+        }
+      );
+    });
 });
 
 describe('addOption', () => {

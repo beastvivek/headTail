@@ -14,6 +14,12 @@ const addOption = (args, index, options) => {
   const keys = { '-n': 'lineCount', '-c': 'characterCount' };
   const [option, value] = args.slice(index, index + 2);
   const key = keys[option];
+  if (parsedObj.option.key !== undefined && key !== parsedObj.option.key) {
+    throw {
+      name: 'IllegalOption',
+      message: 'usage: head[-n lines | -c bytes][file ...]'
+    };
+  }
   parsedObj.option.key = key;
   parsedObj.option.value = +value;
   return parsedObj;

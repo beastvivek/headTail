@@ -1,10 +1,11 @@
 **TODO**
-- [ ] Give usage if both options are given by user 
 - [ ] Make head work for no space between option and value
+- [ ] If only -number is given then it should work on -n option
  
 **MAYBE**
 
 **DONE**
+- [x] Give usage if both options are given by user 
 - [x] Surround main with a try catch block
 - [x] Use while for parseObj instead of for
 - [x] Change head function's contract
