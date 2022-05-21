@@ -1,5 +1,8 @@
 **TODO**
+- [ ] Use parseArgs in headMain
 - [ ] Parse options to object
+- [ ] Make head work for one option
+- [ ] Move parseArgs to a new file
 - [ ] Set default lineCount to 10 if no options are given
 - [ ] Don't set characterCount unless given
 - [ ] Give usage if both options are given by user 
@@ -7,6 +10,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Create a parse object function
 - [x] Have a try catch for hadMain
 - [x] Rename main in headLib.js
 - [x] Create a main in head.js

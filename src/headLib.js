@@ -19,6 +19,12 @@ const head = (content, options) => {
   return grabNCharacters(content, options.characterCount);
 };
 
+const parseArgs = args => {
+  return {
+    fileName: args
+  };
+};
+
 const headMain = (readFile, filePath) => {
   let content;
   try {
@@ -33,4 +39,5 @@ exports.sliceLines = sliceLines;
 exports.grabNLines = grabNLines;
 exports.grabNCharacters = grabNCharacters;
 exports.headMain = headMain;
+exports.parseArgs = parseArgs;
 exports.head = head;
