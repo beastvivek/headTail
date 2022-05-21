@@ -1,5 +1,4 @@
 **TODO**
-- [ ] Move parseArgs to a new file
 - [ ] Refactor parseArgs function
 - [ ] Make head work for one option
 - [ ] Set default lineCount to 10 if no options are given
@@ -9,6 +8,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Move parseArgs to a new file
 - [x] Parse options to object
 - [x] Use parseArgs in headMain
 - [x] Create a parse object function

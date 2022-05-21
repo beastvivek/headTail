@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { parseArgs } = require('../src/headLib.js');
+const { parseArgs } = require('../src/parseArgs.js');
 
 describe('parseArgs', () => {
   it('Should give object with fileName key for one file', () => {
