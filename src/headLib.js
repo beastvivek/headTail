@@ -21,20 +21,20 @@ const head = (content, option) => {
 };
 
 const headMain = (readFile, args) => {
-  let content, result = '';
+  let content;
   if (args[0] === '--help' || args.length === 0) {
     return 'usage: head[-n lines | -c bytes][file ...]';
   }
   const { fileNames, option } = parseArgs(args);
-  for (let index = 0; index < fileNames.length; index++) {
+  const result = fileNames.map((fileName) => {
     try {
-      content = readFile(fileNames[index], 'utf8');
+      content = readFile(fileName, 'utf8');
     } catch (error) {
       throw { name: 'FileReadError', message: 'Cannot read the file' };
     }
-    result += head(content, option);
-  }
-  return result;
+    return head(content, option);
+  });
+  return result.join('\n');
 };
 
 exports.sliceLines = sliceLines;

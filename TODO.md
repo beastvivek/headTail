@@ -5,6 +5,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Work for multiple files
 - [x] Should give usage for invalid option
 - [x] Should give usage if no argument is given
 - [x] Give error when 0 is given with the switches

@@ -31,6 +31,12 @@ describe('headMain', () => {
       'h\n');
   });
 
+  it('Should give the content when option is given', () => {
+    assert.strictEqual(
+      headMain(mockedReadFileSync, ['./a.txt', './a.txt']),
+      'h\nb\nh\nb\nh\nb\nh\nb');
+  });
+
   it('Should return usage if --help is given', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync, ['--help']),
