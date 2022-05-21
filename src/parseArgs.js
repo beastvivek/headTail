@@ -15,6 +15,12 @@ const validateInput = (parsedObj, key, value) => {
       message: 'usage: head[-n lines | -c bytes][file ...]'
     };
   }
+  if (key === undefined) {
+    throw {
+      name: 'IllegalOption',
+      message: 'usage: head[-n lines | -c bytes][file ...]'
+    };
+  }
   if (value === '0') {
     throw {
       name: 'IllegalValue',

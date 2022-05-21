@@ -65,6 +65,17 @@ describe('addOption', () => {
         }
       );
     });
+
+  it('Should throw error if option is not present',
+    () => {
+      assert.throws(
+        () => parseArgs(['-d', '1', './a.txt']),
+        {
+          name: 'IllegalOption',
+          message: 'usage: head[-n lines | -c bytes][file ...]'
+        }
+      );
+    });
 });
 
 describe('addDefaultValue', () => {

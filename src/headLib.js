@@ -22,7 +22,7 @@ const head = (content, option) => {
 
 const headMain = (readFile, args) => {
   let content, result = '';
-  if (args[0] === '--help' || args === undefined) {
+  if (args[0] === '--help' || args.length === 0) {
     return 'usage: head[-n lines | -c bytes][file ...]';
   }
   const { fileNames, option } = parseArgs(args);
