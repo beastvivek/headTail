@@ -21,14 +21,18 @@ const head = (content, options) => {
 };
 
 const headMain = (readFile, args) => {
-  let content;
-  const { fileName, option } = parseArgs(args);
-  try {
-    content = readFile(fileName[0], 'utf8');
-  } catch (error) {
-    throw { name: 'FileReadError', message: 'Cannot read the file' };
+  let content, index = 0, result = '';
+  const { fileNames, option } = parseArgs(args);
+  while (index < fileNames.length) {
+    try {
+      content = readFile(fileNames[index], 'utf8');
+    } catch (error) {
+      throw { name: 'FileReadError', message: 'Cannot read the file' };
+    }
+    result += head(content, option);
+    index += 1;
   }
-  return head(content, option);
+  return result;
 };
 
 exports.sliceLines = sliceLines;

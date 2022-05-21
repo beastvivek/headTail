@@ -10,9 +10,9 @@ const mockReadFileSync = (actualFilePath, actualEncoding, text) => {
 };
 
 describe('headMain', () => {
-  const mockedReadFileSync = mockReadFileSync('./a.txt', 'utf8', 'hello');
+  const mockedReadFileSync = mockReadFileSync('./a.txt', 'utf8', 'h\nb\nh\nb');
   it('Should give the content', () => {
-    assert.strictEqual(headMain(mockedReadFileSync, ['./a.txt']), 'hello');
+    assert.strictEqual(headMain(mockedReadFileSync, ['./a.txt']), 'h\nb\nh\nb');
   });
 
   it('Should throw an error', () => {
@@ -20,5 +20,14 @@ describe('headMain', () => {
       name: 'FileReadError',
       message: 'Cannot read the file'
     });
+  });
+
+  it('Should give the content when option is given', () => {
+    assert.strictEqual(
+      headMain(mockedReadFileSync, ['-n', '2', './a.txt']),
+      'h\nb');
+    assert.strictEqual(
+      headMain(mockedReadFileSync, ['-c', '2', './a.txt']),
+      'h\n');
   });
 });

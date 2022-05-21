@@ -1,11 +1,14 @@
 **TODO**
-- [ ] Make head work for multiple files as input
-- [ ] Don't set characterCount unless given
+- [ ] Change the object structure
+- [ ] Use while for parseObj instead of for
 - [ ] Give usage if both options are given by user 
+- [ ] Make head work for no space between option and value
  
 **MAYBE**
 
 **DONE**
+- [x] Make head work for multiple files as input
+- [x] Don't set characterCount unless given
 - [x] Test addDefaultValue and addOption functions
 - [x] Refactor parseArgs function
 - [x] Set default lineCount to 10 if no options are given
