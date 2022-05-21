@@ -1,10 +1,10 @@
 **TODO**
 - [ ] Make head work for no space between option and value
-- [ ] If only -number is given then it should work on -n option
  
 **MAYBE**
 
 **DONE**
+- [x] If only -number is given then it should work on -n option
 - [x] Work for multiple files
 - [x] Should give usage for invalid option
 - [x] Should give usage if no argument is given

@@ -30,6 +30,14 @@ describe('parseArgs', () => {
       );
     });
 
+  it('Should give object with fileNames and options',
+    () => {
+      assert.deepStrictEqual(
+        parseArgs(['-2', './a.txt']),
+        { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 2 } }
+      );
+    });
+
   it('Should give usage if both options are given',
     () => {
       assert.throws(
