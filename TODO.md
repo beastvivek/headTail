@@ -1,9 +1,11 @@
 **TODO**
 - [ ] Make head work for no space between option and value
+- [ ] Should print content of files present and error for non present files
  
 **MAYBE**
 
 **DONE**
+- [x] Reduce parseArgs function statements
 - [x] If only -number is given then it should work on -n option
 - [x] Work for multiple files
 - [x] Should give usage for invalid option

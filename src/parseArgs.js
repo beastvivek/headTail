@@ -43,12 +43,9 @@ const addOption = (args, index, options) => {
 
 const parseArgs = args => {
   let options = { fileNames: [], option: {} }, index = 0;
-  const regex = /^-/;
-  while (regex.test(args[index])) {
+  while (/^-/.test(args[index])) {
     if (/^-[0-9]/.test(args[index])) {
-      const key = '-n';
-      const value = args[index].slice(1);
-      options = addOption([key, value], 0, options);
+      options = addOption(['-n', args[index].slice(1)], 0, options);
       index += 1;
     } else {
       options = addOption(args, index, options);
