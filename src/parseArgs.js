@@ -47,6 +47,11 @@ const parseArgs = args => {
     if (/^-[0-9]/.test(args[index])) {
       options = addOption(['-n', args[index].slice(1)], 0, options);
       index += 1;
+    } else if (/^-[cn][0-9]/.test(args[index])) {
+      const key = args[index].slice(0, 2);
+      const value = args[index].slice(2);
+      options = addOption([key, value], 0, options);
+      index += 1;
     } else {
       options = addOption(args, index, options);
       index += 2;

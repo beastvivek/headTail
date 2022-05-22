@@ -48,6 +48,18 @@ describe('parseArgs', () => {
         }
       );
     });
+
+  it('Should work when option and value are given without spaces',
+    () => {
+      assert.deepStrictEqual(
+        parseArgs(['-c2', './a.txt']),
+        { fileNames: ['./a.txt'], option: { key: 'characterCount', value: 2 } }
+      );
+      assert.deepStrictEqual(
+        parseArgs(['-n2', './a.txt']),
+        { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 2 } }
+      );
+    });
 });
 
 describe('addOption', () => {
