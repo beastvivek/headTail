@@ -9,13 +9,8 @@ const addDefaultValue = (options) => {
 };
 
 const validateInput = (parsedObj, key, value) => {
-  if (parsedObj.option.key !== undefined && key !== parsedObj.option.key) {
-    throw {
-      name: 'IllegalOption',
-      message: 'usage: head[-n lines | -c bytes][file ...]'
-    };
-  }
-  if (key === undefined) {
+  const previousKey = parsedObj.option.key;
+  if (previousKey !== undefined && key !== previousKey) {
     throw {
       name: 'IllegalOption',
       message: 'usage: head[-n lines | -c bytes][file ...]'
@@ -41,21 +36,35 @@ const addOption = (args, index, options) => {
   return parsedObj;
 };
 
+const addValidArgs = (args, index, options, increment) => {
+  if (/^-[0-9]/.test(args[index])) {
+    options = addOption(['-n', args[index].slice(1)], 0, options);
+    increment = 1;
+  }
+  if (/^-[cn][0-9]/.test(args[index])) {
+    const key = args[index].slice(0, 2);
+    const value = args[index].slice(2);
+    options = addOption([key, value], 0, options);
+    increment = 1;
+  }
+  if (/^-[cn]$/.test(args[index])) {
+    options = addOption(args, index, options);
+    increment = 2;
+  }
+  return { options, increment };
+};
+
 const parseArgs = args => {
-  let options = { fileNames: [], option: {} }, index = 0;
+  let options = { fileNames: [], option: {} }, index = 0, increment = 0;
   while (/^-/.test(args[index])) {
-    if (/^-[0-9]/.test(args[index])) {
-      options = addOption(['-n', args[index].slice(1)], 0, options);
-      index += 1;
-    } else if (/^-[cn][0-9]/.test(args[index])) {
-      const key = args[index].slice(0, 2);
-      const value = args[index].slice(2);
-      options = addOption([key, value], 0, options);
-      index += 1;
-    } else {
-      options = addOption(args, index, options);
-      index += 2;
+    if (/-[^cn0-9]/.test(args[index])) {
+      throw {
+        name: 'IllegalOption',
+        message: 'usage: head[-n lines | -c bytes][file ...]'
+      };
     }
+    ({ options, increment } = addValidArgs(args, index, options, increment));
+    index += increment;
   }
   options.fileNames = args.slice(index);
   options = addDefaultValue(options);

@@ -1,10 +1,12 @@
 **TODO**
-- [ ] Refactor parseArgs
+- [ ] Change format of multiple file output
+- [ ] Test and refactor addValidArgs 
 - [ ] Should print content of files present and error for non present files
  
 **MAYBE**
 
 **DONE**
+- [x] Refactor parseArgs
 - [x] Make head work for no space between option and value
 - [x] Reduce parseArgs function statements
 - [x] If only -number is given then it should work on -n option
