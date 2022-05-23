@@ -12,7 +12,10 @@ describe('parseArgs', () => {
   it('Should give object with fileNames key for more than one file', () => {
     assert.deepStrictEqual(
       parseArgs(['./a.txt', './b.txt']),
-      { fileNames: ['./a.txt', './b.txt'], option: { key: 'lineCount', value: 10 } });
+      {
+        fileNames: ['./a.txt', './b.txt'],
+        option: { key: 'lineCount', value: 10 }
+      });
   });
 
   it('Should give object with fileNames and options key with lineCount', () => {

@@ -36,21 +36,33 @@ const addOption = (args, index, options) => {
   return parsedObj;
 };
 
-// eslint-disable-next-line max-statements
-const addValidArgs = (args, index, options, increment) => {
+const addIfSingle = (obj, args, index) => {
+  const options = addOption(args, index, obj);
+  return { options, increment: 2 };
+};
+
+const addIfCombined = (args, index, obj) => {
+  const key = args[index].slice(0, 2);
+  const value = args[index].slice(2);
+  const options = addOption([key, value], 0, obj);
+  return { options, increment: 1 };
+};
+
+const addIfNoOption = (obj, args, index) => {
+  const options = addOption(['-n', args[index].slice(1)], 0, obj);
+  return { options, increment: 1 };
+};
+
+const addValidArgs = (args, index, obj) => {
+  let increment, options;
   if (/^-[0-9]/.test(args[index])) {
-    options = addOption(['-n', args[index].slice(1)], 0, options);
-    increment = 1;
+    ({ options, increment } = addIfNoOption(obj, args, index, increment));
   }
   if (/^-[cn][0-9]/.test(args[index])) {
-    const key = args[index].slice(0, 2);
-    const value = args[index].slice(2);
-    options = addOption([key, value], 0, options);
-    increment = 1;
+    ({ options, increment } = addIfCombined(args, index, obj, increment));
   }
   if (/^-[cn]$/.test(args[index])) {
-    options = addOption(args, index, options);
-    increment = 2;
+    ({ options, increment } = addIfSingle(obj, args, index, increment));
   }
   return { options, increment };
 };
