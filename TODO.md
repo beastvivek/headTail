@@ -1,11 +1,13 @@
 **TODO**
-- [ ] Change format of multiple file output
 - [ ] Test and refactor addValidArgs 
+- [ ] Extract functions in parseArgs.js
+- [ ] Think another method instead of using regular expression
 - [ ] Should print content of files present and error for non present files
  
 **MAYBE**
 
 **DONE**
+- [x] Change format of multiple file output
 - [x] Refactor parseArgs
 - [x] Make head work for no space between option and value
 - [x] Reduce parseArgs function statements

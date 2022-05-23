@@ -36,6 +36,7 @@ const addOption = (args, index, options) => {
   return parsedObj;
 };
 
+// eslint-disable-next-line max-statements
 const addValidArgs = (args, index, options, increment) => {
   if (/^-[0-9]/.test(args[index])) {
     options = addOption(['-n', args[index].slice(1)], 0, options);

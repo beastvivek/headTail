@@ -20,6 +20,10 @@ const head = (content, option) => {
   return grabNCharacters(content, option.value);
 };
 
+const formatHeader = (fileName, content) => {
+  return `==> ${fileName} <==\n${content}\n`;
+};
+
 const headMain = (readFile, args) => {
   let content;
   if (args[0] === '--help' || args.length === 0) {
@@ -29,10 +33,13 @@ const headMain = (readFile, args) => {
   const result = fileNames.map((fileName) => {
     try {
       content = readFile(fileName, 'utf8');
+      if (fileNames.length === 1) {
+        return head(content, option);
+      }
     } catch (error) {
       throw { name: 'FileReadError', message: 'Cannot read the file' };
     }
-    return head(content, option);
+    return formatHeader(fileName, head(content, option));
   });
   return result.join('\n');
 };
