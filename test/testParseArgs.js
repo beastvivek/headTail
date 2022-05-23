@@ -6,7 +6,7 @@ describe('parseArgs', () => {
   it('Should give object with fileNames key for one file', () => {
     assert.deepStrictEqual(
       parseArgs(['./a.txt']),
-      { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 10 } });
+      { fileNames: ['./a.txt'], option: { key: 'line', value: 10 } });
   });
 
   it('Should give object with fileNames key for more than one file', () => {
@@ -14,22 +14,22 @@ describe('parseArgs', () => {
       parseArgs(['./a.txt', './b.txt']),
       {
         fileNames: ['./a.txt', './b.txt'],
-        option: { key: 'lineCount', value: 10 }
+        option: { key: 'line', value: 10 }
       });
   });
 
-  it('Should give object with fileNames and options key with lineCount', () => {
+  it('Should give object with fileNames and options key with line', () => {
     assert.deepStrictEqual(
       parseArgs(['-n', '2', './a.txt']),
-      { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 2 } }
+      { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
     );
   });
 
-  it('Should give object with fileNames and options key with characterCount',
+  it('Should give object with fileNames and options key with byte',
     () => {
       assert.deepStrictEqual(
         parseArgs(['-c', '2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { key: 'characterCount', value: 2 } }
+        { fileNames: ['./a.txt'], option: { key: 'byte', value: 2 } }
       );
     });
 
@@ -37,7 +37,7 @@ describe('parseArgs', () => {
     () => {
       assert.deepStrictEqual(
         parseArgs(['-2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 2 } }
+        { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
       );
     });
 
@@ -46,8 +46,8 @@ describe('parseArgs', () => {
       assert.throws(
         () => parseArgs(['-c', '2', '-n', '2', './a.txt']),
         {
-          name: 'IllegalOption',
-          message: 'usage: head[-n lines | -c bytes][file ...]',
+          name: 'IllegalCombination',
+          message: 'head: can\'t combine line and byte counts',
         }
       );
     });
@@ -56,26 +56,26 @@ describe('parseArgs', () => {
     () => {
       assert.deepStrictEqual(
         parseArgs(['-c2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { key: 'characterCount', value: 2 } }
+        { fileNames: ['./a.txt'], option: { key: 'byte', value: 2 } }
       );
       assert.deepStrictEqual(
         parseArgs(['-n2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { key: 'lineCount', value: 2 } }
+        { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
       );
     });
 });
 
 describe('addOption', () => {
-  it('Should give an object with lineCount key', () => {
+  it('Should give an object with line key', () => {
     assert.deepStrictEqual(
       addOption(['-n', '2', './a.txt'], 0, { fileNames: [], option: {} }),
-      { fileNames: [], option: { key: 'lineCount', value: 2 } });
+      { fileNames: [], option: { key: 'line', value: 2 } });
   });
 
-  it('Should give an object with characterCount key', () => {
+  it('Should give an object with byte key', () => {
     assert.deepStrictEqual(
       addOption(['-c', '2', './a.txt'], 0, { fileNames: [], option: {} }),
-      { fileNames: [], option: { key: 'characterCount', value: 2 } });
+      { fileNames: [], option: { key: 'byte', value: 2 } });
   });
 
   it('Should throw error if option has 0 value',
@@ -84,7 +84,14 @@ describe('addOption', () => {
         () => parseArgs(['-c', '0', './a.txt']),
         {
           name: 'IllegalValue',
-          message: 'head: illegal value -- 0',
+          message: 'head: illegal byte count -- 0',
+        }
+      );
+      assert.throws(
+        () => parseArgs(['-n', '0', './a.txt']),
+        {
+          name: 'IllegalValue',
+          message: 'head: illegal line count -- 0',
         }
       );
     });
@@ -95,27 +102,28 @@ describe('addOption', () => {
         () => parseArgs(['-d', '1', './a.txt']),
         {
           name: 'IllegalOption',
-          message: 'usage: head[-n lines | -c bytes][file ...]'
+          message: `head: illegal option -- d
+usage: head[-n lines | -c bytes][file ...]`
         }
       );
     });
 });
 
 describe('addDefaultValue', () => {
-  it('Should add lineCount with value 10 if no option is present', () => {
+  it('Should add line with value 10 if no option is present', () => {
     assert.deepStrictEqual(
       addDefaultValue({ fileNames: [], option: {} }),
-      { fileNames: [], option: { key: 'lineCount', value: 10 } });
+      { fileNames: [], option: { key: 'line', value: 10 } });
   });
 
   it('Should not add any default value if option has value', () => {
-    let input = { fileNames: [], option: { key: 'lineCount', value: 2 } };
+    let input = { fileNames: [], option: { key: 'line', value: 2 } };
     assert.deepStrictEqual(
       addDefaultValue(input),
-      { fileNames: [], option: { key: 'lineCount', value: 2 } });
-    input = { fileNames: [], option: { key: 'characterCount', value: 5 } };
+      { fileNames: [], option: { key: 'line', value: 2 } });
+    input = { fileNames: [], option: { key: 'byte', value: 5 } };
     assert.deepStrictEqual(
       addDefaultValue(input),
-      { fileNames: [], option: { key: 'characterCount', value: 5 } });
+      { fileNames: [], option: { key: 'byte', value: 5 } });
   });
 });

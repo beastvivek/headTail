@@ -14,7 +14,7 @@ const grabNCharacters = (content, characterCount) => {
 };
 
 const head = (content, option) => {
-  if (option.key === 'lineCount') {
+  if (option.key === 'line') {
     return grabNLines(content, option.value);
   }
   return grabNCharacters(content, option.value);

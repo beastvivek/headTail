@@ -4,7 +4,7 @@ const addDefaultValue = (options) => {
   const stringedObject = JSON.stringify(options);
   const parsedObj = JSON.parse(stringedObject);
   if (Object.keys(parsedObj.option).length === 0) {
-    parsedObj.option.key = 'lineCount';
+    parsedObj.option.key = 'line';
     parsedObj.option.value = 10;
   }
   return parsedObj;
@@ -13,7 +13,7 @@ const addDefaultValue = (options) => {
 const addOption = (args, index, options) => {
   const stringedObject = JSON.stringify(options);
   const parsedObj = JSON.parse(stringedObject);
-  const keys = { '-n': 'lineCount', '-c': 'characterCount' };
+  const keys = { '-n': 'line', '-c': 'byte' };
   const [option, value] = args.slice(index, index + 2);
   const key = keys[option];
   validateInput(parsedObj, key, value);
@@ -57,7 +57,7 @@ const parseArgs = args => {
   let options = { fileNames: [], option: {} }, index = 0, increment = 0;
   while (/^-/.test(args[index])) {
     if (/-[^cn0-9]/.test(args[index])) {
-      throwIllegalOptionError();
+      throwIllegalOptionError(args[index].slice(1, 2));
     }
     ({ options, increment } = addValidArgs(args, index, options, increment));
     index += increment;
