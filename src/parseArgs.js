@@ -22,49 +22,37 @@ const addOption = (args, index, options) => {
   return parsedObj;
 };
 
-const addIfSingle = (obj, args, index) => {
-  const options = addOption(args, index, obj);
-  return { options, increment: 2 };
-};
-
-const addIfCombined = (args, index, obj) => {
-  const key = args[index].slice(0, 2);
-  const value = args[index].slice(2);
-  const options = addOption([key, value], 0, obj);
-  return { options, increment: 1 };
-};
-
-const addIfNoOption = (obj, args, index) => {
-  const options = addOption(['-n', args[index].slice(1)], 0, obj);
-  return { options, increment: 1 };
-};
-
-const addValidArgs = (args, index, obj) => {
-  let increment, options;
-  if (/^-[0-9]/.test(args[index])) {
-    ({ options, increment } = addIfNoOption(obj, args, index, increment));
-  }
-  if (/^-[cn][0-9]/.test(args[index])) {
-    ({ options, increment } = addIfCombined(args, index, obj, increment));
-  }
-  if (/^-[cn]$/.test(args[index])) {
-    ({ options, increment } = addIfSingle(obj, args, index, increment));
-  }
-  return { options, increment };
-};
-
 const parseArgs = args => {
-  let options = { fileNames: [], option: {} }, index = 0, increment = 0;
-  while (/^-/.test(args[index])) {
-    if (/-[^cn0-9]/.test(args[index])) {
-      throwIllegalOptionError(args[index].slice(1, 2));
+  let options = { fileNames: [], option: {} }, index = 0;
+  const separatedArgs = separateArgs(args);
+  while (/^-/.test(separatedArgs[index])) {
+    if (/-[^cn0-9]/.test(separatedArgs[index])) {
+      throwIllegalOptionError(separatedArgs[index].slice(1, 2));
     }
-    ({ options, increment } = addValidArgs(args, index, options, increment));
-    index += increment;
+    options = addOption(separatedArgs, index, options);
+    index += 2;
   }
-  options.fileNames = args.slice(index);
+  options.fileNames = separatedArgs.slice(index);
   options = addDefaultValue(options);
   return options;
+};
+
+const separateArgs = (args) => {
+  const separatedArgs = [];
+  args.forEach(element => {
+    if (element.startsWith('-') && /[0-9]/.test(element)) {
+      let [sign, char, ...value] = element;
+      let option = sign + char;
+      if (/^-[0-9]/.test(element)) {
+        [sign, ...value] = element;
+        option = '-n';
+      }
+      separatedArgs.push(option, value.join(''));
+    } else {
+      separatedArgs.push(element);
+    }
+  });
+  return separatedArgs;
 };
 
 exports.parseArgs = parseArgs;

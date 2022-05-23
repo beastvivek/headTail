@@ -6,6 +6,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Used new approach for parseArgs.js
 - [x] Should give the same error as head 
 - [x] Separate error stream and output stream 
 - [x] Separate validations from parseArgs.js
