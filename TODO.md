@@ -1,12 +1,14 @@
 **TODO**
+- [ ] Separate error stream and output stream 
+- [ ] Separate validations from parseArgs.js
 - [ ] Test addValidArgs, addIfSingle , addIfCombined and addIfNoOption
-- [ ] Extract functions in parseArgs.js
 - [ ] Think another method instead of using regular expression
 - [ ] Should print content of files present and error for non present files
  
 **MAYBE**
 
 **DONE**
+- [x] Extract functions in parseArgs.js
 - [x] Refactor addValidArgs 
 - [x] Change format of multiple file output
 - [x] Refactor parseArgs

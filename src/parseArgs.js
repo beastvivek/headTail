@@ -8,19 +8,27 @@ const addDefaultValue = (options) => {
   return parsedObj;
 };
 
+const throwIllegalOptionError = () => {
+  throw {
+    name: 'IllegalOption',
+    message: 'usage: head[-n lines | -c bytes][file ...]'
+  };
+};
+
+const throwIllegalValueError = () => {
+  throw {
+    name: 'IllegalValue',
+    message: 'head: illegal value -- 0'
+  };
+};
+
 const validateInput = (parsedObj, key, value) => {
   const previousKey = parsedObj.option.key;
   if (previousKey !== undefined && key !== previousKey) {
-    throw {
-      name: 'IllegalOption',
-      message: 'usage: head[-n lines | -c bytes][file ...]'
-    };
+    throwIllegalOptionError();
   }
   if (value === '0') {
-    throw {
-      name: 'IllegalValue',
-      message: 'head: illegal value -- 0'
-    };
+    throwIllegalValueError();
   }
 };
 
@@ -71,10 +79,7 @@ const parseArgs = args => {
   let options = { fileNames: [], option: {} }, index = 0, increment = 0;
   while (/^-/.test(args[index])) {
     if (/-[^cn0-9]/.test(args[index])) {
-      throw {
-        name: 'IllegalOption',
-        message: 'usage: head[-n lines | -c bytes][file ...]'
-      };
+      throwIllegalOptionError();
     }
     ({ options, increment } = addValidArgs(args, index, options, increment));
     index += increment;
