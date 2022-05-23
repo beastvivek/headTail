@@ -1,34 +1,34 @@
-const throwIllegalOptionError = (option) => {
-  throw {
+const illegalOptionError = (option) => {
+  return {
     name: 'IllegalOption',
     message: `head: illegal option -- ${option}
 usage: head[-n lines | -c bytes][file ...]`
   };
 };
 
-const throwIllegalValueError = (key) => {
-  throw {
+const illegalValueError = (key, value) => {
+  return {
     name: 'IllegalValue',
-    message: `head: illegal ${key} count -- 0`
+    message: `head: illegal ${key} count -- ${value}`
   };
 };
 
-const throwCantCombineError = () => {
-  throw {
+const cantCombineError = () => {
+  return {
     name: 'IllegalCombination',
     message: 'head: can\'t combine line and byte counts'
   };
 };
 
-const validateInput = (parsedObj, key, value) => {
-  const previousKey = parsedObj.option.key;
-  if (previousKey !== undefined && key !== previousKey) {
-    throwCantCombineError();
+const validateInput = (options, option, value) => {
+  const previousKey = options.key;
+  if (previousKey !== undefined && option !== previousKey) {
+    throw cantCombineError();
   }
-  if (value === '0') {
-    throwIllegalValueError(key);
+  if (+value <= 0 || !isFinite(value)) {
+    throw illegalValueError(option, value);
   }
 };
 
-exports.throwIllegalOptionError = throwIllegalOptionError;
+exports.illegalOptionError = illegalOptionError;
 exports.validateInput = validateInput;

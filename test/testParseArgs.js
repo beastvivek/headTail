@@ -1,6 +1,6 @@
 const assert = require('assert');
 const lib = require('../src/parseArgs.js');
-const { parseArgs, addOption, addDefaultValue } = lib;
+const { parseArgs, getOption, addDefaultValue } = lib;
 
 describe('parseArgs', () => {
   it('Should give object with fileNames key for one file', () => {
@@ -63,20 +63,18 @@ describe('parseArgs', () => {
         { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
       );
     });
-});
 
-describe('addOption', () => {
-  it('Should give an object with line key', () => {
-    assert.deepStrictEqual(
-      addOption(['-n', '2', './a.txt'], 0, { fileNames: [], option: {} }),
-      { fileNames: [], option: { key: 'line', value: 2 } });
-  });
-
-  it('Should give an object with byte key', () => {
-    assert.deepStrictEqual(
-      addOption(['-c', '2', './a.txt'], 0, { fileNames: [], option: {} }),
-      { fileNames: [], option: { key: 'byte', value: 2 } });
-  });
+  it('Should throw error if option is not present',
+    () => {
+      assert.throws(
+        () => parseArgs(['-d', '1', './a.txt']),
+        {
+          name: 'IllegalOption',
+          message: `head: illegal option -- d
+usage: head[-n lines | -c bytes][file ...]`
+        }
+      );
+    });
 
   it('Should throw error if option has 0 value',
     () => {
@@ -95,35 +93,39 @@ describe('addOption', () => {
         }
       );
     });
+});
 
-  it('Should throw error if option is not present',
-    () => {
-      assert.throws(
-        () => parseArgs(['-d', '1', './a.txt']),
-        {
-          name: 'IllegalOption',
-          message: `head: illegal option -- d
-usage: head[-n lines | -c bytes][file ...]`
-        }
-      );
-    });
+describe('getOption', () => {
+  it('Should give an object with line key', () => {
+    assert.deepStrictEqual(
+      getOption(['-n', '2', './a.txt'], 0, {}),
+      { key: 'line', value: 2 });
+  });
+
+  it('Should give an object with byte key', () => {
+    assert.deepStrictEqual(
+      getOption(['-c', '2', './a.txt'], 0, {}),
+      { key: 'byte', value: 2 });
+  });
+
+
 });
 
 describe('addDefaultValue', () => {
   it('Should add line with value 10 if no option is present', () => {
     assert.deepStrictEqual(
-      addDefaultValue({ fileNames: [], option: {} }),
-      { fileNames: [], option: { key: 'line', value: 10 } });
+      addDefaultValue({}),
+      { key: 'line', value: 10 });
   });
 
   it('Should not add any default value if option has value', () => {
-    let input = { fileNames: [], option: { key: 'line', value: 2 } };
+    let input = { key: 'line', value: 2 };
     assert.deepStrictEqual(
       addDefaultValue(input),
-      { fileNames: [], option: { key: 'line', value: 2 } });
-    input = { fileNames: [], option: { key: 'byte', value: 5 } };
+      { key: 'line', value: 2 });
+    input = { key: 'byte', value: 5 };
     assert.deepStrictEqual(
       addDefaultValue(input),
-      { fileNames: [], option: { key: 'byte', value: 5 } });
+      { key: 'byte', value: 5 });
   });
 });
