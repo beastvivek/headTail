@@ -1,3 +1,5 @@
+const { validateInput, throwIllegalOptionError } = require('./validations.js');
+
 const addDefaultValue = (options) => {
   const stringedObject = JSON.stringify(options);
   const parsedObj = JSON.parse(stringedObject);
@@ -6,30 +8,6 @@ const addDefaultValue = (options) => {
     parsedObj.option.value = 10;
   }
   return parsedObj;
-};
-
-const throwIllegalOptionError = () => {
-  throw {
-    name: 'IllegalOption',
-    message: 'usage: head[-n lines | -c bytes][file ...]'
-  };
-};
-
-const throwIllegalValueError = () => {
-  throw {
-    name: 'IllegalValue',
-    message: 'head: illegal value -- 0'
-  };
-};
-
-const validateInput = (parsedObj, key, value) => {
-  const previousKey = parsedObj.option.key;
-  if (previousKey !== undefined && key !== previousKey) {
-    throwIllegalOptionError();
-  }
-  if (value === '0') {
-    throwIllegalValueError();
-  }
 };
 
 const addOption = (args, index, options) => {
