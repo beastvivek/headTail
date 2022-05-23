@@ -24,24 +24,27 @@ const formatHeader = (fileName, content) => {
   return `==> ${fileName} <==\n${content}\n`;
 };
 
-const headMain = (readFile, args) => {
-  let content;
+const headMain = (readFile, std, args) => {
+  let content, exitCode = 0;
   if (args[0] === '--help' || args.length === 0) {
     return 'usage: head[-n lines | -c bytes][file ...]';
   }
   const { fileNames, option } = parseArgs(args);
-  const result = fileNames.map((fileName) => {
+  fileNames.forEach((fileName) => {
     try {
       content = readFile(fileName, 'utf8');
       if (fileNames.length === 1) {
-        return head(content, option);
+        std.log(head(content, option));
+        return exitCode;
       }
     } catch (error) {
-      throw { name: 'FileReadError', message: 'Cannot read the file' };
+      std.error(`head: ${fileName}: No such file or directory`);
+      exitCode = 1;
+      return exitCode;
     }
-    return formatHeader(fileName, head(content, option));
+    std.log(formatHeader(fileName, head(content, option)));
   });
-  return result.join('\n');
+  return exitCode;
 };
 
 exports.sliceLines = sliceLines;
