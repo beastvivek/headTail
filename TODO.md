@@ -1,7 +1,6 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Update README.md for tail
 - [ ] Separate head and tail dir in src and test
 - [ ] Create testTailLIb.js
 - [ ] Write a happy path for tail
@@ -9,6 +8,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Update README.md for tail
 
 ## **HEAD**
 ---
