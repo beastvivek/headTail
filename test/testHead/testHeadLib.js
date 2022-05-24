@@ -1,6 +1,35 @@
 const assert = require('assert');
-const lib = require('../src/headLib.js');
-const { sliceLines, grabNLines } = lib;
+const lib = require('../../src/head/headLib.js');
+const { head, sliceLines, grabNLines, grabNCharacters } = lib;
+
+describe('head', () => {
+  it('Should give one line', () => {
+    assert.deepStrictEqual(
+      head('hello\nbye', { key: 'line', value: 1 }),
+      'hello');
+  });
+
+  it('Should give three line', () => {
+    assert.deepStrictEqual(
+      head('h\nb\nh\nb\nh', { key: 'line', value: 3 }),
+      'h\nb\nh');
+  });
+
+  it('Should give one character', () => {
+    assert.deepStrictEqual(
+      head('h\nb', { key: 'byte', value: 1 }),
+      'h');
+    assert.deepStrictEqual(
+      head('hello\nb', { key: 'byte', value: 1 }),
+      'h');
+  });
+
+  it('Should give three characters', () => {
+    assert.deepStrictEqual(
+      head('h\nb\nh', { key: 'byte', value: 3 }),
+      'h\nb');
+  });
+});
 
 describe('sliceLines', () => {
   it('Should give a line back', () => {
@@ -49,5 +78,17 @@ describe('grabNLines', () => {
     const lines = ['h', 'b', 'h', 'b', 'h'];
     const expected = ['h', 'b', 'h', 'b', 'h'];
     assert.deepStrictEqual(sliceLines(lines, 5), expected);
+  });
+});
+
+describe('grabNCharacters', () => {
+  it('Should return empty string', () => {
+    assert.deepStrictEqual(grabNCharacters('', 1), '');
+  });
+  it('Should return first character', () => {
+    assert.deepStrictEqual(grabNCharacters('hello', 1), 'h');
+  });
+  it('Should return three characters', () => {
+    assert.deepStrictEqual(grabNCharacters('hello', 3), 'hel');
   });
 });
