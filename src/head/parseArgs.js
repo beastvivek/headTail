@@ -27,11 +27,11 @@ const validateValue = (option, value) => {
 };
 
 const isIllegalOption = (option) => {
-  return /-[^cn\d]/.test(option);
+  return !option.startsWith('-c') && !option.startsWith('-n');
 };
 
 const areOptionsLeft = (option) => {
-  return /^-/.test(option);
+  return option.startsWith('-');
 };
 
 const addDefaultsIfEmpty = (option) => {
@@ -51,7 +51,7 @@ const getOption = (args, index) => {
 };
 
 const bothOptionsGiven = (args) => {
-  return /-c/.test(args) && /-n/.test(args);
+  return args.includes('-c') && args.includes('-n');
 };
 
 const generateObject = (separatedArgs) => {
@@ -88,11 +88,17 @@ const isCombinedOption = (text) => {
   return text.startsWith('-') && (/\d/.test(text) || text.length > 2);
 };
 
+const isOnlyNumber = (option) => {
+  const [, character] = option;
+  const numbers = '1234567890';
+  return numbers.includes(character);
+};
+
 const addOption = (separatedArgs, element) => {
   if (isCombinedOption(element)) {
     let [sign, char, ...value] = element;
     let option = sign + char;
-    if (/^-\d/.test(element)) {
+    if (isOnlyNumber(element)) {
       [sign, ...value] = element;
       option = '-n';
     }
