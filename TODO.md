@@ -1,3 +1,17 @@
+## **TAIL**
+---
+**TODO**
+- [ ] Update README.md for tail
+- [ ] Separate head and tail dir in src and test
+- [ ] Create testTailLIb.js
+- [ ] Write a happy path for tail
+
+**MAYBE**
+
+**DONE**
+
+## **HEAD**
+---
 **TODO**
 - [ ] Should return usage if file is not given
 - [ ] Test addValidArgs, addIfSingle , addIfCombined and addIfNoOption
