@@ -20,7 +20,7 @@ const cantCombineError = () => {
   };
 };
 
-const validateInput = (option, value) => {
+const validateValue = (option, value) => {
   if (+value <= 0 || !isFinite(value)) {
     throw illegalValueError(option, value);
   }
@@ -30,7 +30,7 @@ const isIllegalOption = (option) => {
   return /-[^cn0-9]/.test(option);
 };
 
-const optionsAreLeft = (option) => {
+const areOptionsLeft = (option) => {
   return /^-/.test(option);
 };
 
@@ -46,7 +46,7 @@ const getOption = (args, index) => {
   const [option, count] = args.slice(index, index + 2);
   const key = keys[option];
   const value = +count;
-  validateInput(key, value);
+  validateValue(key, value);
   return { key, value };
 };
 
@@ -55,27 +55,27 @@ const bothOptionsGiven = (args) => {
 };
 
 const generateObject = (separatedArgs) => {
-  const options = { fileNames: [], option: {} };
+  const parsedOption = { fileNames: [], option: {} };
   let index = 0;
-  while (optionsAreLeft(separatedArgs[index])) {
+  while (areOptionsLeft(separatedArgs[index])) {
     if (isIllegalOption(separatedArgs[index])) {
       throw illegalOptionError(separatedArgs[index].slice(1, 2));
     }
-    options.option = getOption(separatedArgs, index, options.option);
+    parsedOption.option = getOption(separatedArgs, index);
     index += 2;
   }
-  options.fileNames = separatedArgs.slice(index);
-  options.option = addDefaultsIfEmpty(options.option);
-  return options;
+  parsedOption.fileNames = separatedArgs.slice(index);
+  parsedOption.option = addDefaultsIfEmpty(parsedOption.option);
+  return parsedOption;
 };
 
 const parseArgs = args => {
   const separatedArgs = separateArgsandValues(args);
-  const options = generateObject(separatedArgs);
+  const parsedArgs = generateObject(separatedArgs);
   if (bothOptionsGiven(separatedArgs.join(''))) {
     throw cantCombineError();
   }
-  return options;
+  return parsedArgs;
 };
 
 const separateArgsandValues = (args) => {
