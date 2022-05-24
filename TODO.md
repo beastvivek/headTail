@@ -1,13 +1,15 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Test tail function 
+- [ ] Move common functions to lib directory
+- [ ] Give limit to lastNLines
 - [ ] Use object for passing the count of lines
 - [ ] Set default object in the outer function
 
 **MAYBE**
 
 **DONE**
+- [x] Test tail function 
 - [x] Create a function that will give array to lastNLines
 - [x] Change contract of lastNLines, should take and return array
 - [x] Tail should have a limit of ten lines max
