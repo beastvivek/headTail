@@ -115,4 +115,6 @@ const separateArgsandValues = (args) => {
 
 exports.parseArgs = parseArgs;
 exports.getOption = getOption;
-exports.addDefaultValue = addDefaultsIfEmpty;
+exports.addDefaultsIfEmpty = addDefaultsIfEmpty;
+exports.generateObject = generateObject;
+exports.isCombinedOption = isCombinedOption;

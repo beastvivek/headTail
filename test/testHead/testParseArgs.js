@@ -1,6 +1,6 @@
 const assert = require('assert');
 const lib = require('../../src/head/parseArgs.js');
-const { parseArgs, getOption } = lib;
+const { parseArgs, getOption, addDefaultsIfEmpty, generateObject, isCombinedOption } = lib;
 
 describe('parseArgs', () => {
   it('Should give object with fileNames key for one file', () => {
@@ -127,5 +127,66 @@ describe('getOption', () => {
     assert.deepStrictEqual(
       getOption(['-c', '2', './a.txt'], 0, {}),
       { key: 'byte', value: 2 });
+  });
+});
+
+describe('addDefaultsIfEmpty', () => {
+  it('Should add defaults if object is empty', () => {
+    assert.deepStrictEqual(
+      addDefaultsIfEmpty({}),
+      { key: 'line', value: 10 }
+    );
+  });
+  it('Should not add defaults if object has values', () => {
+    assert.deepStrictEqual(
+      addDefaultsIfEmpty({ key: 'line', value: 2 }),
+      { key: 'line', value: 2 }
+    );
+  });
+});
+
+describe('generateObject', () => {
+  it('Should create object if one option and file is there', () => {
+    assert.deepStrictEqual(
+      generateObject(['-n', '2', './a.txt']),
+      { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
+    );
+    assert.deepStrictEqual(
+      generateObject(['-c', '2', './a.txt']),
+      { fileNames: ['./a.txt'], option: { key: 'byte', value: 2 } }
+    );
+  });
+  it('Should create object if repetitive option and one file is there', () => {
+    assert.deepStrictEqual(
+      generateObject(['-n', '2', '-n', '6', './a.txt']),
+      { fileNames: ['./a.txt'], option: { key: 'line', value: 6 } }
+    );
+    assert.deepStrictEqual(
+      generateObject(['-c', '2', '-c', '8', './a.txt']),
+      { fileNames: ['./a.txt'], option: { key: 'byte', value: 8 } }
+    );
+  });
+  it('Should create object if one option and multiple files are there', () => {
+    assert.deepStrictEqual(
+      generateObject(['-n', '2', './a.txt', './b.txt']),
+      { fileNames: ['./a.txt', './b.txt'], option: { key: 'line', value: 2 } }
+    );
+    assert.deepStrictEqual(
+      generateObject(['-c', '2', './a.txt', './b.txt']),
+      { fileNames: ['./a.txt', './b.txt'], option: { key: 'byte', value: 2 } }
+    );
+  });
+});
+
+describe('isCombinedOption', () => {
+  it('Should give true if option and number are together', () => {
+    assert.deepStrictEqual(isCombinedOption('-n2'), true);
+    assert.deepStrictEqual(isCombinedOption('-c2'), true);
+    assert.deepStrictEqual(isCombinedOption('-2'), true);
+  });
+  it('Should give false if option and number are not together', () => {
+    assert.deepStrictEqual(isCombinedOption('-n'), false);
+    assert.deepStrictEqual(isCombinedOption('-c'), false);
+    assert.deepStrictEqual(isCombinedOption('20'), false);
   });
 });

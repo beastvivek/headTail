@@ -25,13 +25,13 @@
 ---
 **TODO**
 - [ ] Should return usage if file is not given
-- [ ] Test addValidArgs, addIfSingle , addIfCombined and addIfNoOption
 - [ ] Think another method instead of using regular expression
 - [ ] Should print content of files present and error for non present files
  
 **MAYBE**
 
 **DONE**
+- [x] Test addDefaultsIfEmpty,generateObject and isCombinedOption
 - [x] Reduce regular expressions
 - [x] Refactor headMain
 - [x] Should give illegal count if character is given instead of number
