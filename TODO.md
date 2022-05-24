@@ -1,13 +1,15 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Make tail work for multiline input
 - [ ] Tail should have a limit of ten lines max
+- [ ] Create a function that will give array to tail
 - [ ] Use object for passing the count of lines
+- [ ] Set default object in the outer function
 
 **MAYBE**
 
 **DONE**
+- [x] Make tail work for multiline content
 - [x] Create testTailLIb.js
 - [x] Write a happy path for tail
 - [x] Separate head and tail dir in src and test
