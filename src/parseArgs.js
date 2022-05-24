@@ -82,24 +82,26 @@ const isCombinedOption = (text) => {
   return text.startsWith('-') && (/\d/.test(text) || text.length > 2);
 };
 
-const separateArgsandValues = (args) => {
-  const separatedArgs = [];
-  args.forEach(element => {
-    if (isCombinedOption(element)) {
-      let [sign, char, ...value] = element;
-      let option = sign + char;
-      if (/^-\d/.test(element)) {
-        [sign, ...value] = element;
-        option = '-n';
-      }
-      separatedArgs.push(option, value.join(''));
-    } else {
-      separatedArgs.push(element);
+const addOption = (separatedArgs, element) => {
+  if (isCombinedOption(element)) {
+    let [sign, char, ...value] = element;
+    let option = sign + char;
+    if (/^-\d/.test(element)) {
+      [sign, ...value] = element;
+      option = '-n';
     }
-  });
+    separatedArgs.push(option, value.join(''));
+    return separatedArgs;
+  }
+  separatedArgs.push(element);
   return separatedArgs;
+};
+
+const separateArgsandValues = (args) => {
+  return args.reduce(addOption, []);
 };
 
 exports.parseArgs = parseArgs;
 exports.getOption = getOption;
 exports.addDefaultValue = addDefaultsIfEmpty;
+
