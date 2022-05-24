@@ -70,6 +70,12 @@ const generateObject = (separatedArgs) => {
 };
 
 const parseArgs = args => {
+  if (args.length === 0) {
+    throw {
+      name: 'FileNotFound',
+      message: 'usage: head[-n lines | -c bytes][file ...]'
+    };
+  }
   const separatedArgs = separateArgsandValues(args);
   const parsedArgs = generateObject(separatedArgs);
   if (bothOptionsGiven(separatedArgs.join(''))) {
@@ -104,4 +110,3 @@ const separateArgsandValues = (args) => {
 exports.parseArgs = parseArgs;
 exports.getOption = getOption;
 exports.addDefaultValue = addDefaultsIfEmpty;
-

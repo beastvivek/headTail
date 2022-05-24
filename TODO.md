@@ -7,6 +7,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Refactor headMain
 - [x] Should give illegal count if character is given instead of number
 - [x] Should prioritize illegal option over combine option error
 - [x] Refactored parseArgs.js

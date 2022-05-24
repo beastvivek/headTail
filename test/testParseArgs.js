@@ -105,6 +105,15 @@ usage: head[-n lines | -c bytes][file ...]`
         }
       );
     });
+  it('Should throw usage if no args is given', () => {
+    assert.throws(
+      () => parseArgs([]),
+      {
+        name: 'FileNotFound',
+        message: 'usage: head[-n lines | -c bytes][file ...]'
+      }
+    );
+  });
 });
 
 describe('getOption', () => {

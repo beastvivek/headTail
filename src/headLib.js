@@ -20,32 +20,47 @@ const head = (content, option) => {
   return grabNCharacters(content, option.value);
 };
 
-const formatHeader = (fileName, content) => {
+const formatHeader = ({ fileName, content }) => {
   return `==> ${fileName} <==\n${content}\n`;
 };
 
-const headMain = (readFile, std, args) => {
-  let content, exitCode = 0;
-  if (args[0] === '--help' || args.length === 0) {
-    std.error('usage: head[-n lines | -c bytes][file ...]');
-    return 1;
+const processFile = (fileName, readFile, option) => {
+  const result = { fileName };
+  try {
+    const content = readFile(fileName, 'utf8');
+    result.content = head(content, option);
+  } catch (error) {
+    result.error = `head: ${fileName}: No such file or directory`;
   }
+  return result;
+};
+
+const identity = (ele) => ele.content;
+
+const print = (res, std, formatter) => {
+  if (res.error) {
+    std.error(res.error);
+    return;
+  }
+  std.log(formatter(res));
+};
+
+const isSuccessful = function (results) {
+  return results.find((res) => res.error) ? 1 : 0;
+};
+
+const isMultiFile = (fileNames) => fileNames.length > 1;
+
+const decideFormatter = (fileNames) => {
+  return isMultiFile(fileNames) ? formatHeader : identity;
+};
+
+const headMain = (readFile, std, args) => {
   const { fileNames, option } = parseArgs(args);
-  fileNames.forEach((fileName) => {
-    try {
-      content = readFile(fileName, 'utf8');
-      if (fileNames.length === 1) {
-        std.log(head(content, option));
-        return exitCode;
-      }
-    } catch (error) {
-      std.error(`head: ${fileName}: No such file or directory`);
-      exitCode = 1;
-      return exitCode;
-    }
-    std.log(formatHeader(fileName, head(content, option)));
-  });
-  return exitCode;
+  const results = fileNames.map(file => processFile(file, readFile, option));
+  const formatter = decideFormatter(fileNames);
+  results.forEach((res) => print(res, std, formatter));
+  return isSuccessful(results);
 };
 
 exports.sliceLines = sliceLines;
