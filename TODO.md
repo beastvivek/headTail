@@ -1,7 +1,7 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Tail should have a limit of ten lines max
+- [ ] Change contract of line it should take and return array
 - [ ] Create a function that will give array to tail
 - [ ] Use object for passing the count of lines
 - [ ] Set default object in the outer function
@@ -9,6 +9,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Tail should have a limit of ten lines max
 - [x] Make tail work for multiline content
 - [x] Create testTailLIb.js
 - [x] Write a happy path for tail

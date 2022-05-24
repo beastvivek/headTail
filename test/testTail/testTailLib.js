@@ -13,4 +13,9 @@ describe.only('tail', () => {
     assert.deepStrictEqual(tail('h\nb\nh\nb'), 'h\nb\nh\nb');
     assert.deepStrictEqual(tail('h\nb\nh\nb\nh'), 'h\nb\nh\nb\nh');
   });
+  it('Should give max of ten lines', () => {
+    assert.deepStrictEqual(
+      tail('h\nb\nh\nb\nh\nb\nh\nb\nh\nb\nh'),
+      'b\nh\nb\nh\nb\nh\nb\nh\nb\nh');
+  });
 });
