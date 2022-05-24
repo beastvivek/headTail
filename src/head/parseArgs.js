@@ -118,3 +118,5 @@ exports.getOption = getOption;
 exports.addDefaultsIfEmpty = addDefaultsIfEmpty;
 exports.generateObject = generateObject;
 exports.isCombinedOption = isCombinedOption;
+exports.isOnlyNumber = isOnlyNumber;
+exports.addOption = addOption;

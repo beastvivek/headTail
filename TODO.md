@@ -24,13 +24,15 @@
 ## **HEAD**
 ---
 **TODO**
-- [ ] Should return usage if file is not given
+- [ ] Split the testParseArgs.js file
 - [ ] Think another method instead of using regular expression
 - [ ] Should print content of files present and error for non present files
  
 **MAYBE**
 
 **DONE**
+- [x] Test isOnlyNumber and addOption 
+- [x] Should return usage if file is not given
 - [x] Test addDefaultsIfEmpty,generateObject and isCombinedOption
 - [x] Reduce regular expressions
 - [x] Refactor headMain
