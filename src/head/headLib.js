@@ -1,5 +1,5 @@
 const { parseArgs } = require('./parseArgs.js');
-const { splitLines, joinLines } = require('./stringUtils.js');
+const { splitLines, joinLines } = require('../lib/stringUtils.js');
 
 const sliceLines = (lines, limit) => lines.slice(0, limit);
 
