@@ -1,12 +1,15 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Create testTailLIb.js
-- [ ] Write a happy path for tail
+- [ ] Make tail work for multiline input
+- [ ] Tail should have a limit of ten lines max
+- [ ] Use object for passing the count of lines
 
 **MAYBE**
 
 **DONE**
+- [x] Create testTailLIb.js
+- [x] Write a happy path for tail
 - [x] Separate head and tail dir in src and test
 - [x] Update README.md for tail
 
