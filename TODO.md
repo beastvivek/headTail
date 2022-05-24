@@ -6,6 +6,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Should prioritize illegal option over combine option error
 - [x] Refactored parseArgs.js
 - [x] Used new approach for parseArgs.js
 - [x] Should give the same error as head 

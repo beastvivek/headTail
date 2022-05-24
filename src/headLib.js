@@ -27,7 +27,8 @@ const formatHeader = (fileName, content) => {
 const headMain = (readFile, std, args) => {
   let content, exitCode = 0;
   if (args[0] === '--help' || args.length === 0) {
-    return 'usage: head[-n lines | -c bytes][file ...]';
+    std.log('usage: head[-n lines | -c bytes][file ...]');
+    return 1;
   }
   const { fileNames, option } = parseArgs(args);
   fileNames.forEach((fileName) => {

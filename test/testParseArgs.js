@@ -1,6 +1,6 @@
 const assert = require('assert');
 const lib = require('../src/parseArgs.js');
-const { parseArgs, getOption, addDefaultValue } = lib;
+const { parseArgs, getOption } = lib;
 
 describe('parseArgs', () => {
   it('Should give object with fileNames key for one file', () => {
@@ -76,6 +76,18 @@ usage: head[-n lines | -c bytes][file ...]`
       );
     });
 
+  it('Should prioritize illegal option over combine option error',
+    () => {
+      assert.throws(
+        () => parseArgs(['-n3', '-c5', '-d', '1', './a.txt']),
+        {
+          name: 'IllegalOption',
+          message: `head: illegal option -- d
+usage: head[-n lines | -c bytes][file ...]`
+        }
+      );
+    });
+
   it('Should throw error if option has 0 value',
     () => {
       assert.throws(
@@ -106,26 +118,5 @@ describe('getOption', () => {
     assert.deepStrictEqual(
       getOption(['-c', '2', './a.txt'], 0, {}),
       { key: 'byte', value: 2 });
-  });
-
-
-});
-
-describe('addDefaultValue', () => {
-  it('Should add line with value 10 if no option is present', () => {
-    assert.deepStrictEqual(
-      addDefaultValue({}),
-      { key: 'line', value: 10 });
-  });
-
-  it('Should not add any default value if option has value', () => {
-    let input = { key: 'line', value: 2 };
-    assert.deepStrictEqual(
-      addDefaultValue(input),
-      { key: 'line', value: 2 });
-    input = { key: 'byte', value: 5 };
-    assert.deepStrictEqual(
-      addDefaultValue(input),
-      { key: 'byte', value: 5 });
   });
 });
