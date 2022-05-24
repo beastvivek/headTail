@@ -21,13 +21,13 @@ const cantCombineError = () => {
 };
 
 const validateValue = (option, value) => {
-  if (+value <= 0 || !isFinite(value)) {
+  if (!isFinite(value) || +value <= 0) {
     throw illegalValueError(option, value);
   }
 };
 
 const isIllegalOption = (option) => {
-  return /-[^cn0-9]/.test(option);
+  return /-[^cn\d]/.test(option);
 };
 
 const areOptionsLeft = (option) => {
@@ -45,8 +45,8 @@ const getOption = (args, index) => {
   const keys = { '-n': 'line', '-c': 'byte' };
   const [option, count] = args.slice(index, index + 2);
   const key = keys[option];
+  validateValue(key, count);
   const value = +count;
-  validateValue(key, value);
   return { key, value };
 };
 
@@ -78,13 +78,17 @@ const parseArgs = args => {
   return parsedArgs;
 };
 
+const isCombinedOption = (text) => {
+  return text.startsWith('-') && (/\d/.test(text) || text.length > 2);
+};
+
 const separateArgsandValues = (args) => {
   const separatedArgs = [];
   args.forEach(element => {
-    if (element.startsWith('-') && /[0-9]/.test(element)) {
+    if (isCombinedOption(element)) {
       let [sign, char, ...value] = element;
       let option = sign + char;
-      if (/^-[0-9]/.test(element)) {
+      if (/^-\d/.test(element)) {
         [sign, ...value] = element;
         option = '-n';
       }

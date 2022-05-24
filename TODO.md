@@ -1,4 +1,5 @@
 **TODO**
+- [ ] Should return usage if file is not given
 - [ ] Test addValidArgs, addIfSingle , addIfCombined and addIfNoOption
 - [ ] Think another method instead of using regular expression
 - [ ] Should print content of files present and error for non present files
@@ -6,6 +7,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Should give illegal count if character is given instead of number
 - [x] Should prioritize illegal option over combine option error
 - [x] Refactored parseArgs.js
 - [x] Used new approach for parseArgs.js

@@ -66,8 +66,8 @@ describe('headMain', () => {
   });
 
   it('Should return usage if --help or no args is given', () => {
-    const log = mockConsole('usage: head[-n lines | -c bytes][file ...]');
-    const error = mockConsole('h');
+    const log = mockConsole('h');
+    const error = mockConsole('usage: head[-n lines | -c bytes][file ...]');
     const mockedConsole = { log, error };
     assert.strictEqual(
       headMain(mockedReadFileSync, mockedConsole, ['--help']),
