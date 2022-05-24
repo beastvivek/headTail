@@ -24,13 +24,13 @@
 ## **HEAD**
 ---
 **TODO**
-- [ ] Split the testParseArgs.js file
 - [ ] Think another method instead of using regular expression
 - [ ] Should print content of files present and error for non present files
  
 **MAYBE**
 
 **DONE**
+- [x] Split the testParseArgs.js file
 - [x] Test isOnlyNumber and addOption 
 - [x] Should return usage if file is not given
 - [x] Test addDefaultsIfEmpty,generateObject and isCombinedOption
