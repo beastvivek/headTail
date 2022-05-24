@@ -34,27 +34,31 @@ describe('lastNLines', () => {
 
 describe('tail', () => {
   it('Should give one line back', () => {
-    assert.deepStrictEqual(tail('h', 10), 'h');
-    assert.deepStrictEqual(tail('hello', 10), 'hello');
+    assert.deepStrictEqual(tail('h', { count: 10 }), 'h');
+    assert.deepStrictEqual(tail('hello', { count: 10 }), 'hello');
   });
   it('Should give two line back', () => {
-    assert.deepStrictEqual(tail('h\nb', 10), 'h\nb');
+    assert.deepStrictEqual(tail('h\nb', { count: 10 }), 'h\nb');
   });
   it('Should give all lines back', () => {
-    assert.deepStrictEqual(tail('h\nb\nh\nb', 10), 'h\nb\nh\nb');
-    assert.deepStrictEqual(tail('h\nb\nh\nb\nh', 10), 'h\nb\nh\nb\nh');
+    assert.deepStrictEqual(
+      tail('h\nb\nh\nb', { count: 10 }),
+      'h\nb\nh\nb');
+    assert.deepStrictEqual(
+      tail('h\nb\nh\nb\nh', { count: 10 }),
+      'h\nb\nh\nb\nh');
   });
   it('Should give max of ten lines', () => {
     assert.deepStrictEqual(
-      tail('h\nb\nh\nb\nh\nb\nh\nb\nh\nb\nh', 10),
+      tail('h\nb\nh\nb\nh\nb\nh\nb\nh\nb\nh', { count: 10 }),
       'b\nh\nb\nh\nb\nh\nb\nh\nb\nh');
   });
   it('Should give only number of lines given', () => {
     assert.deepStrictEqual(
-      tail('h\nb\nh\nb', 2),
+      tail('h\nb\nh\nb', { count: 2 }),
       'h\nb');
     assert.deepStrictEqual(
-      tail('h\nb\nh\nb\nh\nb', 4),
+      tail('h\nb\nh\nb\nh\nb', { count: 4 }),
       'h\nb\nh\nb');
   });
 });

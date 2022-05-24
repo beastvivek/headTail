@@ -1,12 +1,14 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Use object for passing the count of lines
 - [ ] Set default object in the outer function
+- [ ] Make a function that works for byte count
+- [ ] Make tail function work for line and byte count
 
 **MAYBE**
 
 **DONE**
+- [x] Use object for passing the count of lines
 - [x] Give limit to lastNLines and tail
 - [x] Move common functions to lib directory
 - [x] Test tail function 

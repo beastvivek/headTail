@@ -2,9 +2,9 @@ const { splitLines, joinLines } = require('../lib/stringUtils.js');
 
 const lastNLines = (lines, limit) => lines.slice(-limit);
 
-const tail = (content, limit) => {
+const tail = (content, { count }) => {
   const lines = splitLines(content);
-  const slicedLines = lastNLines(lines, limit);
+  const slicedLines = lastNLines(lines, count);
   return joinLines(slicedLines);
 };
 
