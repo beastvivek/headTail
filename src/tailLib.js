@@ -16,12 +16,13 @@ const tail = (content, { flag, count }) => {
   return lastNBytes(content, count);
 };
 
-// eslint-disable-next-line no-unused-vars
-const tailMain = () => {
-  return tail('h\nb\nh', { flag: 'line', count: 10 });
+const tailMain = (readFile, fileName) => {
+  const content = readFile(fileName, 'utf8');
+  return tail(content, { flag: 'line', count: 10 });
 };
 
 exports.lastNLines = lastNLines;
 exports.tail = tail;
 exports.lastNBytes = lastNBytes;
 exports.extractLines = extractLines;
+exports.tailMain = tailMain;

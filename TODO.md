@@ -1,12 +1,13 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Implement `tail file`
+- [ ] Connect tailMain to tail.js
 - [ ] Think of tailParser 
 
 **MAYBE**
 
 **DONE**
+- [x] Implement `tail file`
 - [x] Extract the conditions inside tail if to a new function
 - [x] Change parseArgs.js to headParser.js
 - [x] Change the directory structure of src and test

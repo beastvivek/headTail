@@ -1,6 +1,27 @@
 const assert = require('assert');
 const lib = require('../src/tailLib.js');
-const { tail, lastNLines, lastNBytes, extractLines } = lib;
+const { tail, lastNLines, lastNBytes, extractLines, tailMain } = lib;
+
+const mockReadFileSync = (actualFilePath, actualEncoding, text) => {
+  return function (filePath, encoding) {
+    assert.strictEqual(filePath, actualFilePath);
+    assert.strictEqual(encoding, actualEncoding);
+    return text;
+  };
+};
+
+describe('tailMain', () => {
+  it('Should give last ten lines of the file', () => {
+    let mockedReadFileSync = mockReadFileSync('./a.txt', 'utf8', 'h');
+    assert.strictEqual(
+      tailMain(mockedReadFileSync, './a.txt'),
+      'h');
+    mockedReadFileSync = mockReadFileSync('./b.txt', 'utf8', 'h\nb\nh');
+    assert.strictEqual(
+      tailMain(mockedReadFileSync, './b.txt'),
+      'h\nb\nh');
+  });
+});
 
 describe('lastNLines', () => {
   it('Should give one line back', () => {
