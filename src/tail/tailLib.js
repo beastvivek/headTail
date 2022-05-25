@@ -8,5 +8,10 @@ const tail = (content, { count }) => {
   return joinLines(slicedLines);
 };
 
+// eslint-disable-next-line no-unused-vars
+const tailMain = () => {
+  return tail('h\nb\nh', { count: 10 });
+};
+
 exports.lastNLines = lastNLines;
 exports.tail = tail;
