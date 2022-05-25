@@ -1,6 +1,7 @@
 const assert = require('assert');
 const lib = require('../src/tailLib.js');
-const { tail, lastNLines, lastNBytes, extractLines, tailMain } = lib;
+const { tail, lastNLines, lastNBytes,
+  extractLines, tailMain, processFile } = lib;
 
 const mockReadFileSync = (actualFilePath, actualEncoding, text) => {
   return function (filePath, encoding) {
@@ -25,6 +26,28 @@ describe('tailMain', () => {
     const mockedReadFileSync = mockReadFileSync('./b.txt', 'utf8', 'h\nb\nh');
     assert.throws(
       () => tailMain(mockedReadFileSync, './a.txt'),
+      {
+        name: 'FileNotFound',
+        message: 'tail: ./a.txt: No such file or directory'
+      });
+  });
+});
+
+describe('processFile', () => {
+  it('Should give the content of file', () => {
+    let mockedReadFileSync = mockReadFileSync('./a.txt', 'utf8', 'h');
+    assert.strictEqual(
+      processFile(mockedReadFileSync, './a.txt'),
+      'h');
+    mockedReadFileSync = mockReadFileSync('./b.txt', 'utf8', 'h\nb\nh');
+    assert.strictEqual(
+      processFile(mockedReadFileSync, './b.txt'),
+      'h\nb\nh');
+  });
+  it('Should throw an error if file is not present', () => {
+    const mockedReadFileSync = mockReadFileSync('./b.txt', 'utf8', 'h\nb\nh');
+    assert.throws(
+      () => processFile(mockedReadFileSync, './a.txt'),
       {
         name: 'FileNotFound',
         message: 'tail: ./a.txt: No such file or directory'

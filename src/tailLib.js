@@ -16,16 +16,21 @@ const tail = (content, { flag, count }) => {
   return lastNBytes(content, count);
 };
 
-const tailMain = (readFile, fileName) => {
+const processFile = (readFile, fileName) => {
   let content;
   try {
     content = readFile(fileName, 'utf8');
+    return content;
   } catch (error) {
     throw {
       name: 'FileNotFound',
       message: `tail: ${fileName}: No such file or directory`
     };
   }
+};
+
+const tailMain = (readFile, fileName) => {
+  const content = processFile(readFile, fileName);
   return tail(content, { flag: 'line', count: 10 });
 };
 
@@ -34,3 +39,4 @@ exports.tail = tail;
 exports.lastNBytes = lastNBytes;
 exports.extractLines = extractLines;
 exports.tailMain = tailMain;
+exports.processFile = processFile;

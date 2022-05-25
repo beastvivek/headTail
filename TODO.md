@@ -7,6 +7,7 @@
 **MAYBE**
 
 **DONE**
+- [x] Extract processFile function from tailMain
 - [x] Connect tailMain to tail.js
 - [x] Custom error for file not found
 - [x] Implement `tail file`
