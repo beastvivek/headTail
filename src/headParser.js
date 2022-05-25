@@ -36,18 +36,18 @@ const areOptionsLeft = (option) => {
 
 const addDefaultsIfEmpty = (option) => {
   if (Object.keys(option).length === 0) {
-    return { key: 'line', value: 10 };
+    return { flag: 'line', count: 10 };
   }
   return option;
 };
 
 const getOption = (args, index) => {
   const keys = { '-n': 'line', '-c': 'byte' };
-  const [option, count] = args.slice(index, index + 2);
-  const key = keys[option];
-  validateValue(key, count);
-  const value = +count;
-  return { key, value };
+  const [option, value] = args.slice(index, index + 2);
+  const flag = keys[option];
+  validateValue(flag, value);
+  const count = +value;
+  return { flag, count };
 };
 
 const bothOptionsGiven = (args) => {

@@ -14,10 +14,10 @@ const grabNCharacters = (content, characterCount) => {
 };
 
 const head = (content, option) => {
-  if (option.key === 'line') {
-    return grabNLines(content, option.value);
+  if (option.flag === 'line') {
+    return grabNLines(content, option.count);
   }
-  return grabNCharacters(content, option.value);
+  return grabNCharacters(content, option.count);
 };
 
 const formatHeader = ({ fileName, content }) => {

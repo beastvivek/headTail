@@ -6,28 +6,28 @@ const { head, sliceLines, grabNLines,
 describe('head', () => {
   it('Should give one line', () => {
     assert.deepStrictEqual(
-      head('hello\nbye', { key: 'line', value: 1 }),
+      head('hello\nbye', { flag: 'line', count: 1 }),
       'hello');
   });
 
   it('Should give three line', () => {
     assert.deepStrictEqual(
-      head('h\nb\nh\nb\nh', { key: 'line', value: 3 }),
+      head('h\nb\nh\nb\nh', { flag: 'line', count: 3 }),
       'h\nb\nh');
   });
 
   it('Should give one character', () => {
     assert.deepStrictEqual(
-      head('h\nb', { key: 'byte', value: 1 }),
+      head('h\nb', { flag: 'byte', count: 1 }),
       'h');
     assert.deepStrictEqual(
-      head('hello\nb', { key: 'byte', value: 1 }),
+      head('hello\nb', { flag: 'byte', count: 1 }),
       'h');
   });
 
   it('Should give three characters', () => {
     assert.deepStrictEqual(
-      head('h\nb\nh', { key: 'byte', value: 3 }),
+      head('h\nb\nh', { flag: 'byte', count: 3 }),
       'h\nb');
   });
 });

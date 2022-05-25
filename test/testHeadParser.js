@@ -6,7 +6,7 @@ describe('parseArgs', () => {
   it('Should give object with fileNames key for one file', () => {
     assert.deepStrictEqual(
       parseArgs(['./a.txt']),
-      { fileNames: ['./a.txt'], option: { key: 'line', value: 10 } });
+      { fileNames: ['./a.txt'], option: { flag: 'line', count: 10 } });
   });
 
   it('Should give object with fileNames key for more than one file', () => {
@@ -14,14 +14,14 @@ describe('parseArgs', () => {
       parseArgs(['./a.txt', './b.txt']),
       {
         fileNames: ['./a.txt', './b.txt'],
-        option: { key: 'line', value: 10 }
+        option: { flag: 'line', count: 10 }
       });
   });
 
   it('Should give object with fileNames and options key with line', () => {
     assert.deepStrictEqual(
       parseArgs(['-n', '2', './a.txt']),
-      { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
+      { fileNames: ['./a.txt'], option: { flag: 'line', count: 2 } }
     );
   });
 
@@ -29,7 +29,7 @@ describe('parseArgs', () => {
     () => {
       assert.deepStrictEqual(
         parseArgs(['-c', '2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { key: 'byte', value: 2 } }
+        { fileNames: ['./a.txt'], option: { flag: 'byte', count: 2 } }
       );
     });
 
@@ -37,7 +37,7 @@ describe('parseArgs', () => {
     () => {
       assert.deepStrictEqual(
         parseArgs(['-2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
+        { fileNames: ['./a.txt'], option: { flag: 'line', count: 2 } }
       );
     });
 
@@ -56,11 +56,11 @@ describe('parseArgs', () => {
     () => {
       assert.deepStrictEqual(
         parseArgs(['-c2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { key: 'byte', value: 2 } }
+        { fileNames: ['./a.txt'], option: { flag: 'byte', count: 2 } }
       );
       assert.deepStrictEqual(
         parseArgs(['-n2', './a.txt']),
-        { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
+        { fileNames: ['./a.txt'], option: { flag: 'line', count: 2 } }
       );
     });
 
@@ -120,13 +120,13 @@ describe('getOption', () => {
   it('Should give an object with line key', () => {
     assert.deepStrictEqual(
       getOption(['-n', '2', './a.txt'], 0, {}),
-      { key: 'line', value: 2 });
+      { flag: 'line', count: 2 });
   });
 
   it('Should give an object with byte key', () => {
     assert.deepStrictEqual(
       getOption(['-c', '2', './a.txt'], 0, {}),
-      { key: 'byte', value: 2 });
+      { flag: 'byte', count: 2 });
   });
 });
 
@@ -134,13 +134,13 @@ describe('addDefaultsIfEmpty', () => {
   it('Should add defaults if object is empty', () => {
     assert.deepStrictEqual(
       addDefaultsIfEmpty({}),
-      { key: 'line', value: 10 }
+      { flag: 'line', count: 10 }
     );
   });
   it('Should not add defaults if object has values', () => {
     assert.deepStrictEqual(
-      addDefaultsIfEmpty({ key: 'line', value: 2 }),
-      { key: 'line', value: 2 }
+      addDefaultsIfEmpty({ flag: 'line', count: 2 }),
+      { flag: 'line', count: 2 }
     );
   });
 });
@@ -149,31 +149,31 @@ describe('generateObject', () => {
   it('Should create object if one option and file is there', () => {
     assert.deepStrictEqual(
       generateObject(['-n', '2', './a.txt']),
-      { fileNames: ['./a.txt'], option: { key: 'line', value: 2 } }
+      { fileNames: ['./a.txt'], option: { flag: 'line', count: 2 } }
     );
     assert.deepStrictEqual(
       generateObject(['-c', '2', './a.txt']),
-      { fileNames: ['./a.txt'], option: { key: 'byte', value: 2 } }
+      { fileNames: ['./a.txt'], option: { flag: 'byte', count: 2 } }
     );
   });
   it('Should create object if repetitive option and one file is there', () => {
     assert.deepStrictEqual(
       generateObject(['-n', '2', '-n', '6', './a.txt']),
-      { fileNames: ['./a.txt'], option: { key: 'line', value: 6 } }
+      { fileNames: ['./a.txt'], option: { flag: 'line', count: 6 } }
     );
     assert.deepStrictEqual(
       generateObject(['-c', '2', '-c', '8', './a.txt']),
-      { fileNames: ['./a.txt'], option: { key: 'byte', value: 8 } }
+      { fileNames: ['./a.txt'], option: { flag: 'byte', count: 8 } }
     );
   });
   it('Should create object if one option and multiple files are there', () => {
     assert.deepStrictEqual(
       generateObject(['-n', '2', './a.txt', './b.txt']),
-      { fileNames: ['./a.txt', './b.txt'], option: { key: 'line', value: 2 } }
+      { fileNames: ['./a.txt', './b.txt'], option: { flag: 'line', count: 2 } }
     );
     assert.deepStrictEqual(
       generateObject(['-c', '2', './a.txt', './b.txt']),
-      { fileNames: ['./a.txt', './b.txt'], option: { key: 'byte', value: 2 } }
+      { fileNames: ['./a.txt', './b.txt'], option: { flag: 'byte', count: 2 } }
     );
   });
 });
