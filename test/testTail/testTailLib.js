@@ -1,5 +1,5 @@
 const assert = require('assert');
-const { tail, lastNLines } = require('../../src/tail/tailLib.js');
+const { tail, lastNLines, lastNBytes } = require('../../src/tail/tailLib.js');
 
 describe('lastNLines', () => {
   it('Should give one line back', () => {
@@ -60,5 +60,16 @@ describe('tail', () => {
     assert.deepStrictEqual(
       tail('h\nb\nh\nb\nh\nb', { count: 4 }),
       'h\nb\nh\nb');
+  });
+});
+
+describe('lastNBytes', () => {
+  it('Should give the text back', () => {
+    assert.deepStrictEqual(lastNBytes('h', 10), 'h');
+    assert.deepStrictEqual(lastNBytes('hello', 10), 'hello');
+  });
+  it('Should give number of characters mentioned from last', () => {
+    assert.deepStrictEqual(lastNBytes('hello', 3), 'llo');
+    assert.deepStrictEqual(lastNBytes('hello\nbye', 5), 'o\nbye');
   });
 });

@@ -45,7 +45,7 @@ const print = (res, std, formatter) => {
   std.log(formatter(res));
 };
 
-const isSuccessful = function (results) {
+const determineExitCode = function (results) {
   return results.find((res) => res.error) ? 1 : 0;
 };
 
@@ -60,7 +60,7 @@ const headMain = (readFile, std, args) => {
   const results = fileNames.map(file => processFile(file, readFile, option));
   const formatter = decideFormatter(fileNames);
   results.forEach((res) => print(res, std, formatter));
-  return isSuccessful(results);
+  return determineExitCode(results);
 };
 
 exports.sliceLines = sliceLines;
