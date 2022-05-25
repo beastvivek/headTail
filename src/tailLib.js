@@ -17,7 +17,15 @@ const tail = (content, { flag, count }) => {
 };
 
 const tailMain = (readFile, fileName) => {
-  const content = readFile(fileName, 'utf8');
+  let content;
+  try {
+    content = readFile(fileName, 'utf8');
+  } catch (error) {
+    throw {
+      name: 'FileNotFound',
+      message: `tail: ${fileName}: No such file or directory`
+    };
+  }
   return tail(content, { flag: 'line', count: 10 });
 };
 

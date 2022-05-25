@@ -21,6 +21,15 @@ describe('tailMain', () => {
       tailMain(mockedReadFileSync, './b.txt'),
       'h\nb\nh');
   });
+  it('Should throw an error if file is not present', () => {
+    const mockedReadFileSync = mockReadFileSync('./b.txt', 'utf8', 'h\nb\nh');
+    assert.throws(
+      () => tailMain(mockedReadFileSync, './a.txt'),
+      {
+        name: 'FileNotFound',
+        message: 'tail: ./a.txt: No such file or directory'
+      });
+  });
 });
 
 describe('lastNLines', () => {

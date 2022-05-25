@@ -1,12 +1,14 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Connect tailMain to tail.js
+- [ ] Make tail work for -n and -c as different arguments
 - [ ] Think of tailParser 
 
 **MAYBE**
 
 **DONE**
+- [x] Connect tailMain to tail.js
+- [x] Custom error for file not found
 - [x] Implement `tail file`
 - [x] Extract the conditions inside tail if to a new function
 - [x] Change parseArgs.js to headParser.js
