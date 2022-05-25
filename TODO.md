@@ -1,12 +1,13 @@
 ## **TAIL**
 ---
 **TODO**
+- [ ] Implement `tail file`
 - [ ] Think of tailParser 
-- [ ] Extract the conditions inside tail if to a new function
 
 **MAYBE**
 
 **DONE**
+- [x] Extract the conditions inside tail if to a new function
 - [x] Change parseArgs.js to headParser.js
 - [x] Change the directory structure of src and test
 - [x] Make tail function work for line and byte count

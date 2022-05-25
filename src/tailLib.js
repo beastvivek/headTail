@@ -3,11 +3,15 @@ const { splitLines, joinLines } = require('./stringUtils.js');
 const lastNLines = (lines, limit) => lines.slice(-limit);
 const lastNBytes = (text, limit) => text.slice(-limit);
 
+const extractLines = (content, count) => {
+  const lines = splitLines(content);
+  const slicedLines = lastNLines(lines, count);
+  return joinLines(slicedLines);
+};
+
 const tail = (content, { flag, count }) => {
   if (flag === 'line') {
-    const lines = splitLines(content);
-    const slicedLines = lastNLines(lines, count);
-    return joinLines(slicedLines);
+    return extractLines(content, count);
   }
   return lastNBytes(content, count);
 };
@@ -20,3 +24,4 @@ const tailMain = () => {
 exports.lastNLines = lastNLines;
 exports.tail = tail;
 exports.lastNBytes = lastNBytes;
+exports.extractLines = extractLines;
