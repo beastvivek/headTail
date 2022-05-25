@@ -1,13 +1,15 @@
 ## **TAIL**
 ---
 **TODO**
-- [ ] Call respective functions in tail according to the object
-- [ ] Change the contract of tail
-- [ ] Make tail function work for line and byte count
+- [ ] Extract the conditions inside tail if to a new function
 
 **MAYBE**
 
 **DONE**
+- [x] Change the directory structure of src and test
+- [x] Make tail function work for line and byte count
+- [x] Call respective functions in tail according to the object
+- [x] Change the contract of tail
 - [x] Make a function that works for byte count
 - [x] Set default object in the outer function
 - [x] Use object for passing the count of lines

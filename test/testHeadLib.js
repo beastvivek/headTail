@@ -1,5 +1,5 @@
 const assert = require('assert');
-const lib = require('../../src/head/headLib.js');
+const lib = require('../src/headLib.js');
 const { head, sliceLines, grabNLines, grabNCharacters } = lib;
 
 describe('head', () => {
