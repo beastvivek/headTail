@@ -1,6 +1,7 @@
 const assert = require('assert');
 const lib = require('../src/headLib.js');
-const { head, sliceLines, grabNLines, grabNCharacters } = lib;
+const { head, sliceLines, grabNLines,
+  grabNCharacters, formatHeader, determineExitCode } = lib;
 
 describe('head', () => {
   it('Should give one line', () => {
@@ -90,5 +91,26 @@ describe('grabNCharacters', () => {
   });
   it('Should return three characters', () => {
     assert.deepStrictEqual(grabNCharacters('hello', 3), 'hel');
+  });
+});
+
+describe('formatHeader', () => {
+  it('Should give formatted content', () => {
+    assert.deepStrictEqual(
+      formatHeader({ fileName: 'hello.txt', content: 'hello' }),
+      '==> hello.txt <==\nhello\n');
+  });
+});
+
+describe('determineExitCode', () => {
+  it('Should give 1 if error is found', () => {
+    assert.deepStrictEqual(
+      determineExitCode([{ fileName: 'a.txt', error: 'h' }]),
+      1);
+  });
+  it('Should give 0 if error is not found', () => {
+    assert.deepStrictEqual(
+      determineExitCode([{ fileName: 'a.txt', content: 'hello' }]),
+      0);
   });
 });

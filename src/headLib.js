@@ -68,3 +68,5 @@ exports.grabNLines = grabNLines;
 exports.grabNCharacters = grabNCharacters;
 exports.headMain = headMain;
 exports.head = head;
+exports.formatHeader = formatHeader;
+exports.determineExitCode = determineExitCode;
