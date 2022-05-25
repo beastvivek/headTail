@@ -1,4 +1,4 @@
-const { parseArgs } = require('./parseArgs.js');
+const { parseArgs } = require('./headParser.js');
 const { splitLines, joinLines } = require('./stringUtils.js');
 
 const sliceLines = (lines, limit) => lines.slice(0, limit);
@@ -35,18 +35,18 @@ const processFile = (fileName, readFile, option) => {
   return result;
 };
 
-const identity = (ele) => ele.content;
+const identity = (element) => element.content;
 
-const print = (res, std, formatter) => {
-  if (res.error) {
-    std.error(res.error);
+const print = (result, std, formatter) => {
+  if (result.error) {
+    std.error(result.error);
     return;
   }
-  std.log(formatter(res));
+  std.log(formatter(result));
 };
 
 const determineExitCode = function (results) {
-  return results.find((res) => res.error) ? 1 : 0;
+  return results.find((result) => result.error) ? 1 : 0;
 };
 
 const isMultiFile = (fileNames) => fileNames.length > 1;
@@ -59,7 +59,7 @@ const headMain = (readFile, std, args) => {
   const { fileNames, option } = parseArgs(args);
   const results = fileNames.map(file => processFile(file, readFile, option));
   const formatter = decideFormatter(fileNames);
-  results.forEach((res) => print(res, std, formatter));
+  results.forEach((result) => print(result, std, formatter));
   return determineExitCode(results);
 };
 
