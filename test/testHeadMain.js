@@ -9,10 +9,14 @@ const mockReadFileSync = (actualFilePath, actualEncoding, text) => {
   };
 };
 
-const mockConsole = (expectedArg) => {
-  return function (actualArg) {
-    assert.strictEqual(expectedArg, actualArg);
+const mockConsole = (...expectedArg) => {
+  let index = 0;
+  const std = function (actualArg) {
+    assert.strictEqual(expectedArg[index], actualArg);
+    index++;
+    std.count = index;
   };
+  return std;
 };
 
 describe('headMain', () => {
@@ -24,6 +28,7 @@ describe('headMain', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync, mockedConsole, ['./a.txt']),
       0);
+    assert.strictEqual(log.count, 1);
   });
 
   it('Should give exit code of 1', () => {
@@ -33,27 +38,31 @@ describe('headMain', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync, mockedConsole, ['./b.txt']),
       1);
+    assert.strictEqual(error.count, 1);
   });
 
   it('Should give exit code of 0 when option is given', () => {
-    const log = mockConsole('h');
+    const log = mockConsole('h', 'h');
     const error = mockConsole('h');
     const mockedConsole = { log, error };
     assert.strictEqual(
       headMain(mockedReadFileSync, mockedConsole, ['-n', '2', './a.txt']),
       0);
+    assert.strictEqual(log.count, 1);
     assert.strictEqual(
       headMain(mockedReadFileSync, mockedConsole, ['-c', '2', './a.txt']),
       0);
+    assert.strictEqual(log.count, 2);
   });
 
   it('Should give exit code 0 when multiple files are given', () => {
-    const log = mockConsole('==> ./a.txt <==\nh\n');
+    const log = mockConsole('==> ./a.txt <==\nh\n', '==> ./a.txt <==\nh\n');
     const error = mockConsole('h');
     const mockedConsole = { log, error };
     assert.strictEqual(
       headMain(mockedReadFileSync, mockedConsole, ['./a.txt', './a.txt']),
       0);
+    assert.strictEqual(log.count, 2);
   });
 
   it('Should give exit code 1 when any file is not present', () => {
@@ -63,5 +72,7 @@ describe('headMain', () => {
     assert.strictEqual(
       headMain(mockedReadFileSync, mockedConsole, ['./a.txt', './b.txt']),
       1);
+    assert.strictEqual(log.count, 1);
+    assert.strictEqual(error.count, 1);
   });
 });
