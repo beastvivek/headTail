@@ -34,6 +34,8 @@
 ---
 ## **HEAD**
 - **TODO**
+  - [ ] Use a function to give usage in headParser.js
+  - [ ] Extract a function that creates an error object
   - [ ] Think another method instead of using regular expression
   - [ ] Should print content of files present and error for non present files
  

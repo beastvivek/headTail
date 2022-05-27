@@ -30,7 +30,7 @@ const isIllegalOption = (option) => {
   return !option.startsWith('-c') && !option.startsWith('-n');
 };
 
-const areOptionsLeft = (option) => {
+const isOption = (option) => {
   return option.startsWith('-');
 };
 
@@ -57,7 +57,7 @@ const bothOptionsGiven = (args) => {
 const generateObject = (separatedArgs) => {
   const parsedOption = { fileNames: [], option: {} };
   let index = 0;
-  while (areOptionsLeft(separatedArgs[index])) {
+  while (isOption(separatedArgs[index])) {
     if (isIllegalOption(separatedArgs[index])) {
       throw illegalOptionError(separatedArgs[index].slice(1, 2));
     }
@@ -67,21 +67,6 @@ const generateObject = (separatedArgs) => {
   parsedOption.fileNames = separatedArgs.slice(index);
   parsedOption.option = addDefaultsIfEmpty(parsedOption.option);
   return parsedOption;
-};
-
-const parseArgs = args => {
-  if (args.length === 0) {
-    throw {
-      name: 'FileNotFound',
-      message: 'usage: head[-n lines | -c bytes][file ...]'
-    };
-  }
-  const separatedArgs = separateArgsandValues(args);
-  const parsedArgs = generateObject(separatedArgs);
-  if (bothOptionsGiven(separatedArgs.join(''))) {
-    throw cantCombineError();
-  }
-  return parsedArgs;
 };
 
 const isCombinedOption = (text) => {
@@ -111,6 +96,21 @@ const addOption = (separatedArgs, element) => {
 
 const separateArgsandValues = (args) => {
   return args.reduce(addOption, []);
+};
+
+const parseArgs = args => {
+  if (args.length === 0) {
+    throw {
+      name: 'FileNotFound',
+      message: 'usage: head[-n lines | -c bytes][file ...]'
+    };
+  }
+  const separatedArgs = separateArgsandValues(args);
+  const parsedArgs = generateObject(separatedArgs);
+  if (bothOptionsGiven(separatedArgs.join(''))) {
+    throw cantCombineError();
+  }
+  return parsedArgs;
 };
 
 exports.parseArgs = parseArgs;
