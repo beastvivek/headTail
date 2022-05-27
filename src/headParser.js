@@ -1,8 +1,10 @@
+const getUsage = () => 'usage: head[-n lines | -c bytes][file ...]';
+
 const illegalOptionError = (option) => {
   return {
     name: 'IllegalOption',
     message: `head: illegal option -- ${option}
-usage: head[-n lines | -c bytes][file ...]`
+${getUsage()}`
   };
 };
 
@@ -102,7 +104,7 @@ const parseArgs = args => {
   if (args.length === 0) {
     throw {
       name: 'FileNotFound',
-      message: 'usage: head[-n lines | -c bytes][file ...]'
+      message: getUsage()
     };
   }
   const separatedArgs = separateArgsandValues(args);
