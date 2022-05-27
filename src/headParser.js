@@ -1,25 +1,25 @@
 const getUsage = () => 'usage: head[-n lines | -c bytes][file ...]';
 
+const generateErrorObject = (name, message) => {
+  return { name, message };
+};
+
 const illegalOptionError = (option) => {
-  return {
-    name: 'IllegalOption',
-    message: `head: illegal option -- ${option}
-${getUsage()}`
-  };
+  const name = 'IllegalOption';
+  const message = `head: illegal option -- ${option}\n${getUsage()}`;
+  return generateErrorObject(name, message);
 };
 
 const illegalValueError = (key, value) => {
-  return {
-    name: 'IllegalValue',
-    message: `head: illegal ${key} count -- ${value}`
-  };
+  const name = 'IllegalValue';
+  const message = `head: illegal ${key} count -- ${value}`;
+  return generateErrorObject(name, message);
 };
 
 const cantCombineError = () => {
-  return {
-    name: 'IllegalCombination',
-    message: 'head: can\'t combine line and byte counts'
-  };
+  const name = 'IllegalCombination';
+  const message = 'head: can\'t combine line and byte counts';
+  return generateErrorObject(name, message);
 };
 
 const validateValue = (option, value) => {
