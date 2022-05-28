@@ -75,17 +75,11 @@ const isCombinedOption = (text) => {
   return text.startsWith('-') && (/\d/.test(text) || text.length > 2);
 };
 
-const isOnlyNumber = (option) => {
-  const [, character] = option;
-  const numbers = '1234567890';
-  return numbers.includes(character);
-};
-
 const addOption = (separatedArgs, element) => {
   if (isCombinedOption(element)) {
     let [sign, char, ...value] = element;
     let option = sign + char;
-    if (isOnlyNumber(element)) {
+    if (isFinite(element)) {
       [sign, ...value] = element;
       option = '-n';
     }
@@ -120,5 +114,4 @@ exports.getOption = getOption;
 exports.addDefaultsIfEmpty = addDefaultsIfEmpty;
 exports.generateObject = generateObject;
 exports.isCombinedOption = isCombinedOption;
-exports.isOnlyNumber = isOnlyNumber;
 exports.addOption = addOption;

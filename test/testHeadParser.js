@@ -105,6 +105,7 @@ usage: head[-n lines | -c bytes][file ...]`
         }
       );
     });
+
   it('Should throw usage if no args is given', () => {
     assert.throws(
       () => parseArgs([]),
@@ -137,6 +138,7 @@ describe('addDefaultsIfEmpty', () => {
       { flag: 'line', count: 10 }
     );
   });
+
   it('Should not add defaults if object has values', () => {
     assert.deepStrictEqual(
       addDefaultsIfEmpty({ flag: 'line', count: 2 }),
@@ -156,6 +158,7 @@ describe('generateObject', () => {
       { fileNames: ['./a.txt'], option: { flag: 'byte', count: 2 } }
     );
   });
+
   it('Should create object if repetitive option and one file is there', () => {
     assert.deepStrictEqual(
       generateObject(['-n', '2', '-n', '6', './a.txt']),
@@ -166,6 +169,7 @@ describe('generateObject', () => {
       { fileNames: ['./a.txt'], option: { flag: 'byte', count: 8 } }
     );
   });
+
   it('Should create object if one option and multiple files are there', () => {
     assert.deepStrictEqual(
       generateObject(['-n', '2', './a.txt', './b.txt']),

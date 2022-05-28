@@ -34,13 +34,13 @@
 ---
 ## **HEAD**
 - **TODO**
-  - [ ] Extract a function that creates an error object
   - [ ] Think another method instead of using regular expression
   - [ ] Should print content of files present and error for non present files
  
 - **MAYBE**
 
 - **DONE**
+  - [x] Extract a function that creates an error object
   - [x] Use a function to give usage in headParser.js
   - [x] Split the testParseArgs.js file
   - [x] Test isOnlyNumber and addOption 

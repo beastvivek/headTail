@@ -86,9 +86,11 @@ describe('grabNCharacters', () => {
   it('Should return empty string', () => {
     assert.deepStrictEqual(grabNCharacters('', 1), '');
   });
+
   it('Should return first character', () => {
     assert.deepStrictEqual(grabNCharacters('hello', 1), 'h');
   });
+
   it('Should return three characters', () => {
     assert.deepStrictEqual(grabNCharacters('hello', 3), 'hel');
   });
@@ -108,6 +110,7 @@ describe('determineExitCode', () => {
       determineExitCode([{ fileName: 'a.txt', error: 'h' }]),
       1);
   });
+
   it('Should give 0 if error is not found', () => {
     assert.deepStrictEqual(
       determineExitCode([{ fileName: 'a.txt', content: 'hello' }]),
