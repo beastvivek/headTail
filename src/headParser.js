@@ -4,6 +4,13 @@ const generateErrorObject = (name, message) => {
   return { name, message };
 };
 
+const fileNotFoundError = () => {
+  return {
+    name: 'FileNotFound',
+    message: getUsage()
+  };
+};
+
 const illegalOptionError = (option) => {
   const name = 'IllegalOption';
   const message = `head: illegal option -- ${option}\n${getUsage()}`;
@@ -102,10 +109,7 @@ const separateArgsandValues = (args) => {
 
 const parseCmdArgs = args => {
   if (args.length === 0) {
-    throw {
-      name: 'FileNotFound',
-      message: getUsage()
-    };
+    throw fileNotFoundError();
   }
   const separatedArgs = separateArgsandValues(args);
   const parsedArgs = parseArgs(separatedArgs);
