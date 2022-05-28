@@ -121,3 +121,5 @@ exports.addDefaultsIfEmpty = addDefaultsIfEmpty;
 exports.parseArgs = parseArgs;
 exports.isCombinedOption = isCombinedOption;
 exports.addOption = addOption;
+exports.validateValue = validateValue;
+exports.isIllegalOption = isIllegalOption;

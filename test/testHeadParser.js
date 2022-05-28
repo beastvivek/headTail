@@ -1,6 +1,7 @@
 const assert = require('assert');
 const lib = require('../src/headParser.js');
-const { parseCmdArgs, getOption, addDefaultsIfEmpty, parseArgs } = lib;
+const { parseCmdArgs, getOption, addDefaultsIfEmpty,
+  parseArgs, validateValue, isIllegalOption } = lib;
 
 describe('parseCmdArgs', () => {
   it('Should give object with fileNames key for one file', () => {
@@ -179,5 +180,49 @@ describe('parseArgs', () => {
       parseArgs(['-c', '2', './a.txt', './b.txt']),
       { fileNames: ['./a.txt', './b.txt'], option: { flag: 'byte', count: 2 } }
     );
+  });
+});
+
+describe('validateValue', () => {
+  it('Should throw error if value is invalid', () => {
+    assert.throws(
+      () => validateValue('line', 'gg'),
+      {
+        name: 'IllegalValue',
+        message: 'head: illegal line count -- gg'
+      });
+    assert.throws(
+      () => validateValue('byte', '-1'),
+      {
+        name: 'IllegalValue',
+        message: 'head: illegal byte count -- -1'
+      });
+  });
+  it('Should not throw any error for valid value', () => {
+    assert.doesNotThrow(
+      () => validateValue('line', '2')
+    );
+    assert.doesNotThrow(
+      () => validateValue('byte', '10')
+    );
+  });
+});
+
+describe('isIllegalOption', () => {
+  it('Should return true when illegal option is given', () => {
+    assert.deepStrictEqual(
+      isIllegalOption('-v'),
+      true);
+    assert.deepStrictEqual(
+      isIllegalOption('-p'),
+      true);
+  });
+  it('Should return false when legal option is given', () => {
+    assert.deepStrictEqual(
+      isIllegalOption('-n'),
+      false);
+    assert.deepStrictEqual(
+      isIllegalOption('-c'),
+      false);
   });
 });
