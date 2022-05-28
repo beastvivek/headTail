@@ -56,7 +56,7 @@ const bothOptionsGiven = (args) => {
   return args.includes('-c') && args.includes('-n');
 };
 
-const generateObject = (separatedArgs) => {
+const parseArgs = (separatedArgs) => {
   const parsedOption = { fileNames: [], option: {} };
   let index = 0;
   while (isOption(separatedArgs[index])) {
@@ -75,15 +75,21 @@ const isCombinedOption = (text) => {
   return text.startsWith('-') && (/\d/.test(text) || text.length > 2);
 };
 
+const getOptionAndValue = (args) => {
+  let [sign, flag, ...value] = args;
+  let option = sign + flag;
+  if (isFinite(args)) {
+    [sign, ...value] = args;
+    option = '-n';
+  }
+  value = value.join('');
+  return { option, value };
+};
+
 const addOption = (separatedArgs, element) => {
   if (isCombinedOption(element)) {
-    let [sign, char, ...value] = element;
-    let option = sign + char;
-    if (isFinite(element)) {
-      [sign, ...value] = element;
-      option = '-n';
-    }
-    separatedArgs.push(option, value.join(''));
+    const { option, value } = getOptionAndValue(element);
+    separatedArgs.push(option, value);
     return separatedArgs;
   }
   separatedArgs.push(element);
@@ -94,7 +100,7 @@ const separateArgsandValues = (args) => {
   return args.reduce(addOption, []);
 };
 
-const parseArgs = args => {
+const parseCmdArgs = args => {
   if (args.length === 0) {
     throw {
       name: 'FileNotFound',
@@ -102,16 +108,16 @@ const parseArgs = args => {
     };
   }
   const separatedArgs = separateArgsandValues(args);
-  const parsedArgs = generateObject(separatedArgs);
+  const parsedArgs = parseArgs(separatedArgs);
   if (bothOptionsGiven(separatedArgs.join(''))) {
     throw cantCombineError();
   }
   return parsedArgs;
 };
 
-exports.parseArgs = parseArgs;
+exports.parseCmdArgs = parseCmdArgs;
 exports.getOption = getOption;
 exports.addDefaultsIfEmpty = addDefaultsIfEmpty;
-exports.generateObject = generateObject;
+exports.parseArgs = parseArgs;
 exports.isCombinedOption = isCombinedOption;
 exports.addOption = addOption;
