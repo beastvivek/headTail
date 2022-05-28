@@ -75,11 +75,11 @@ const isCombinedOption = (text) => {
   return text.startsWith('-') && (/\d/.test(text) || text.length > 2);
 };
 
-const getOptionAndValue = (args) => {
-  let [sign, flag, ...value] = args;
+const getOptionAndValue = (arg) => {
+  let [sign, flag, ...value] = arg;
   let option = sign + flag;
-  if (isFinite(args)) {
-    [sign, ...value] = args;
+  if (isFinite(arg)) {
+    [sign, ...value] = arg;
     option = '-n';
   }
   value = value.join('');
@@ -123,3 +123,5 @@ exports.isCombinedOption = isCombinedOption;
 exports.addOption = addOption;
 exports.validateValue = validateValue;
 exports.isIllegalOption = isIllegalOption;
+exports.bothOptionsGiven = bothOptionsGiven;
+exports.getOptionAndValue = getOptionAndValue;

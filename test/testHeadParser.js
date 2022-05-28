@@ -1,7 +1,8 @@
 const assert = require('assert');
 const lib = require('../src/headParser.js');
 const { parseCmdArgs, getOption, addDefaultsIfEmpty,
-  parseArgs, validateValue, isIllegalOption } = lib;
+  parseArgs, validateValue, isIllegalOption, bothOptionsGiven,
+  getOptionAndValue } = lib;
 
 describe('parseCmdArgs', () => {
   it('Should give object with fileNames key for one file', () => {
@@ -198,6 +199,7 @@ describe('validateValue', () => {
         message: 'head: illegal byte count -- -1'
       });
   });
+
   it('Should not throw any error for valid value', () => {
     assert.doesNotThrow(
       () => validateValue('line', '2')
@@ -217,6 +219,7 @@ describe('isIllegalOption', () => {
       isIllegalOption('-p'),
       true);
   });
+
   it('Should return false when legal option is given', () => {
     assert.deepStrictEqual(
       isIllegalOption('-n'),
@@ -224,5 +227,48 @@ describe('isIllegalOption', () => {
     assert.deepStrictEqual(
       isIllegalOption('-c'),
       false);
+  });
+});
+
+describe('bothOptionsGiven', () => {
+  it('Should give true if both "-c" and "-v" are given', () => {
+    assert.deepStrictEqual(
+      bothOptionsGiven(['-c', '2', '-n', '3']),
+      true);
+    assert.deepStrictEqual(
+      bothOptionsGiven(['-c', '2', '-n', '4', '-c', '9']),
+      true);
+  });
+
+  it('Should give false if both "-c" and "-v" are not given', () => {
+    assert.deepStrictEqual(
+      bothOptionsGiven(['-v', '2', '-c', '3']),
+      false);
+    assert.deepStrictEqual(
+      bothOptionsGiven(['-v', '2', '-n', '3']),
+      false);
+  });
+});
+
+describe('getOptionAndValue', () => {
+  it('Should give option and value if option and value are combined', () => {
+    assert.deepStrictEqual(
+      getOptionAndValue('-c2'),
+      { option: '-c', value: '2' });
+    assert.deepStrictEqual(
+      getOptionAndValue('-n8'),
+      { option: '-n', value: '8' });
+    assert.deepStrictEqual(
+      getOptionAndValue('-v8'),
+      { option: '-v', value: '8' });
+  });
+
+  it('Should give option and value if only "-value" is given', () => {
+    assert.deepStrictEqual(
+      getOptionAndValue('-12'),
+      { option: '-n', value: '12' });
+    assert.deepStrictEqual(
+      getOptionAndValue('-2'),
+      { option: '-n', value: '2' });
   });
 });

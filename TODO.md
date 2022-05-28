@@ -34,14 +34,16 @@
 ---
 ## **HEAD**
 - **TODO**
-  - [ ] Test all functions in head parser
   - [ ] Extract FileNotFoundError in a function
+  - [ ] Pull head function call out of the try catch block
+  - [ ] Make decision of line or byte splitting in headMain
   - [ ] Think another method instead of using regular expression
   - [ ] Should print content of files present and error for non present files
  
 - **MAYBE**
 
 - **DONE**
+  - [x] Test all functions in head parser
   - [x] Extract a function that creates an error object
   - [x] Use a function to give usage in headParser.js
   - [x] Split the testParseArgs.js file
